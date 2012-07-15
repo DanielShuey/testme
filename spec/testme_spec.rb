@@ -84,10 +84,17 @@ include TestMe
       context 'when name is bob' do
         before :each do
           given name: 'bob'
-          @result = is? name: 'bob'
         end
 
-        specify('asserts name is bob') { @result.should == true }
+        it 'asserts name is bob' do
+          result = is? name: 'bob'
+          result.should == true
+        end
+
+        it 'asserts name is not fred' do 
+          result = is? name: 'fred'
+          result.should_not == true
+        end
       end
 
       context 'when block is given' do

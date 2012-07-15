@@ -3,8 +3,10 @@ module TestMe
 
     class Simple
 
+      #TODO color_scheme
+
       def test topic
-        puts "  test #{topic.name}"
+        puts "  test " + topic.name.bright.color(250, 37, 115)
       end
 
       def given desc=nil, stubs=nil, &block
@@ -12,13 +14,13 @@ module TestMe
       end
 
       def also desc=nil, stubs=nil, &block
-        puts "    also " + context_to_string(desc, stubs, &block)
+        puts "     also " + context_to_string(desc, stubs, &block)
       end
 
       def is? method, actual, expected
         success = actual == expected
 
-        puts "      is #{method} #{expected}? " + (success ? 'YES'.green : "NO, it was '#{actual}'".red) + "\n\n"
+        puts '      ' + method.to_s + ' = ' + expected.to_s + '? ' + (success ? 'YES'.green : "NO, it was '#{actual}'".red) + "\n\n"
       end
 
       def compile
@@ -27,22 +29,26 @@ module TestMe
 
     private
       def block_to_string &block
-        block.to_ruby[6..-3]
+        "(custom block)"
       end
 
       def context_to_string desc=nil, stubs=nil, &block
         str = ""
 
         if desc.class == String || desc.class == Symbol
-          str += ":#{desc} "
+          str += ":#{desc}: ".blue
         end
 
         if desc.class == Hash
-          str += stubs.map{|k,v| "#{k} is #{v}"}.join(', ') + ' '
+          stubs = desc
+        end
+
+        if stubs
+          str += stubs.map{|k,v| (k.to_s + ': ' + v.to_s).bright}.join(', ') + ' '
         end
 
         if block
-          str += block_to_string(block)
+          str += block_to_string(&block)
         end
 
         return str

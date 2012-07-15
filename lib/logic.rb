@@ -1,23 +1,23 @@
 module TestMe
 
-  @formatter = Formatter::Simple.new
+  @@formatter = Formatter::Simple.new
 
   def topic
-    @topic
+    @@topic
   end
 
   def test topic
-    @formatter.test topic
+    @@formatter.test topic
 
-    @contexts = {}
-    @topic_class = topic.name
-    @topic = Double.new(Object::const_get(@topic_class).new)
+    @@contexts = {}
+    @@topic_class = topic.name
+    @@topic = Double.new(Object::const_get(@@topic_class).new)
   end
  
   def given desc=nil, stubs=nil, &block
-    @formatter.given desc, stubs, &block
+    @@formatter.given desc, stubs, &block
 
-    @topic = Double.new(Object::const_get(@topic_class).new)
+    @@topic = Double.new(Object::const_get(@@topic_class).new)
 
     if desc.class == String || desc.class == Symbol
       if stubs == nil and block == nil
@@ -34,7 +34,7 @@ module TestMe
   end
 
   def also desc=nil, stubs=nil, &block
-    @formatter.given desc, stubs, &block
+    @@formatter.also desc, stubs, &block
 
     if desc.class == String || desc.class == Symbol
       if stubs == nil and block == nil
@@ -52,6 +52,7 @@ module TestMe
 
   def is? *args, &block
     if block
+      method = true
       result = block.call
     else
       if args[0].class == Hash
@@ -63,13 +64,15 @@ module TestMe
 
       if args[0].class == String
         method = args[0]
-        actual = eval("@topic.#{args[0]}")
+        actual = eval("@@topic.#{args[0]}")
         expected = args[1]
         result = actual == expected
       end
     end
 
-    @formatter.is? method, actual, expected
+    @@formatter.is? method, actual, expected
+
+    result
   end
 
   def self.run path; end
@@ -85,18 +88,18 @@ private
     c.stubs = stubs if stubs
     c.block = block if block
 
-    @contexts[name] = c
+    @@contexts[name] = c
   end
 
   def load_context name
-    c = @contexts[name]
+    c = @@contexts[name]
     set_context c.stubs, &c.block
   end
 
   def set_context stubs=nil, &block
     if stubs
       stubs.each do |k, v|
-        @topic.send("#{k}=".to_sym, v)
+        @@topic.send("#{k}=".to_sym, v)
       end
     end
 
