@@ -87,13 +87,13 @@ As a Raketask
           end
           
           context 'when style is Hawaiian' do
-              before :all do
-                @pizza.stub(:style => 'Hawaiian')
-              end
-
-              it "should be Michel's Hawaiian Pizza" do
-                @pizza.name.should == "Michel's Hawaiian Pizza"
-              end
+            before :all do
+              @pizza.stub(:style => 'Hawaiian')
+            end
+  
+            it "should be Michel's Hawaiian Pizza" do
+              @pizza.name.should == "Michel's Hawaiian Pizza"
+            end
           end
         end
       end
@@ -134,8 +134,8 @@ As a Raketask
 
     given non_existent_method: "this never existed before"
     
-        $ topic.non_existent_method
-        $ => "this never existed before"
+    > $ topic.non_existent_method
+    > $ => "this never existed before"
     
 > Code run inside a block will still automatically stub for you
 
