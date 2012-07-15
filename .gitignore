@@ -1,0 +1,6 @@
+pkg
+doc
+.yardoc
+.DS_Store
+/Gemfile.lock
+/notes
