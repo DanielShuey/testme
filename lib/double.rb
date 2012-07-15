@@ -2,8 +2,7 @@ module TestMe
   class Double
     def initialize subject=nil
       @subject = subject if subject
-      @dict = Hash.new
-      @overrides = Hash.new
+      @dict = {}
     end
 
     def method_missing(method, *args, &block)
