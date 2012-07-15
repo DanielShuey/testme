@@ -2,29 +2,23 @@ module TestMe
   class Double
     def initialize subject=nil
       @subject = subject if subject
-      @stub = Hash.new
-    end
-
-    def create_method_chain
-      
+      @dict = Hash.new
+      @overrides = Hash.new
     end
 
     def method_missing(method, *args, &block)
-      if @stub[method]
-        @stub[method].call *args, &block
+      if @subject 
+        if @subject.respond_to?(method) && !@dict.key?(method)
+          return @subject.send(method, *args, &block)
+        end
+      end
+
+      if method.to_s =~ /=$/
+        return @dict[method.to_s.match(/^(.*)=$/)[1].to_sym] = args.first
       else
-        @subject.send(method, *args, &block)
+        return @dict[method] ||= Double.new
       end
     end
 
-    def send_with_chain(methods, *args)
-      obj = self
-      [methods].flatten.each {|m| obj = obj.send(m, *args)}
-      obj
-    end
-
-    def stub name, &block
-      @stub[name.to_s]
-    end
   end
 end
