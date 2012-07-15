@@ -1,7 +1,7 @@
-# i am test
+# Test Me
 *A minimalistic testing framework*
 
-    i am Test
+    test Me
       given simple: true
         is? simple: true
 
