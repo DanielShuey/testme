@@ -51,6 +51,19 @@ describe TestMe do
         topic.name.should == 'bob'
       end
     end
+
+    context 'when description is given' do
+      before :each do
+        given :name_is_bob, name: 'bob'
+      end
+
+      it 'should save the context' do
+        given name: 'fred'
+        given :name_is_bob
+        
+        topic.name.should == 'bob'
+      end
+    end
   end
 
   describe '#also' do
@@ -67,9 +80,9 @@ describe TestMe do
     end
   end
 
-  describe '#as' do
-    it 'stores the context' do
-      given name: 'bob'
-    end
+  describe '#is?' do
+
+
+
   end
 end

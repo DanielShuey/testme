@@ -12,8 +12,13 @@ module TestMe
   def given desc=nil, stubs=nil, &block
     @topic = Double.new(Object::const_get(@topic_class).new)
 
-    if desc.class.name == 'String' || desc.class.name == 'Symbol'
-      save_context(desc, stubs, true, block)
+    if desc.class == String || desc.class == Symbol
+      if stubs == nil and block == nil
+        load_context desc
+        return
+      end
+
+      save_context desc, stubs, true, &block
     elsif desc.class.name == 'Hash'
       stubs = desc
     end
@@ -22,14 +27,23 @@ module TestMe
   end
 
   def also desc=nil, stubs=nil, &block
+    if desc.class == String || desc.class == Symbol
+      if stubs == nil and block == nil
+        load_context desc
+        return
+      end
+
+      save_context desc, stubs, true, &block
+    elsif desc.class.name == 'Hash'
+      stubs = desc
+    end
+
     set_context stubs, &block
   end
 
-  def as desc
-    @contexts[desc] = @topic
+  def is? 
+    
   end
-
-  def is? *args; end
 
   def before &block; end
 
@@ -45,11 +59,16 @@ private
   def save_context name, stubs, clear, &block
     c = Context.new
     c.name = name
-    c.block = block if block
     c.stubs = stubs if stubs
     c.clear = clear
+    c.block = block if block
 
     @contexts[name] = c
+  end
+
+  def load_context name
+    c = @contexts[name]
+    set_context c.stubs, &c.block
   end
 
   def set_context stubs=nil, &block
