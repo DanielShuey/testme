@@ -2,12 +2,10 @@
 *A straight forward testing framework*
 
     i am Test
-      given :simple, true
-        is? :simple, true
+      given simple: true
+        is? simple: true
 
 >   Alleviate the 'the big ball of mud'
-
->   Test what you mean
 
 >   Pure Ruby DSL
 
@@ -19,41 +17,50 @@ Put in Gemfile
 
 `gem "testme", :git => "git@github.com:DanielShuey/testme.git"`
 
-Start testing
+Test file
 
-    Iamtest.start!
+    include TestMe
+    
+Inline testing
+
+    // Some code here
+
+    module TestMe
+    
+    end
+    
+    // Some more code here
     
 As a Raketask
 
     task :test do
-        require 'iamtest'
-        Iamtest.start!
+        require 'testme'
         Dir.glob(File.dirname(__FILE__) + '/tests/**/*.test.rb') {|file| require file}
     end
 
 ## Detailed Example
 
-    i am Pizza
-      given style: 'Pepperoni', owner: 'Santoni'
-        is? :name, "Santoni's Pepperoni Pizza"
+    test Pizza
+      given owner: 'Santoni', style: 'Pepperoni'
+        is? name: "Santoni's Pepperoni Pizza"
     
-      given style: 'Pepperoni' # Context resets
-        is? :name, "Santoni's Pepperoni Pizza"
-    
-      also owner: 'Santoni' # Add on to previous context
-        is? :name, "Santoni's Pepperoni Pizza"
+      given { topic.name = 'Michel' } # Context resets
+        is? name: "Santoni's Pepperoni Pizza"
+        
+      also style: 'Hawaiian' # Add on to previous context
+        is? name: "Michels's Hawaiian Pizza"
 
 > ### Output
 
 >     i am Pizza
->       given style is 'Pepperoni', owner is 'Santoni'
+>       given style: 'Pepperoni', owner: 'Santoni'
 >         is name, Santoni's Pepperoni Pizza? YES
->        
->       given style is 'Pepperoni'
->         is name, Santoni's Pepperoni Pizza? NO, it was 'Pepperoni Pizza'!
->        
->       also owner is 'Santoni'
->         is name, Santoni's Pepperoni Pizza? YES
+>
+>       given style: 'Pepperoni'
+>         is name, Santoni's Pepperoni Pizza? NO, it was Michel's Pizza! 
+>
+>       also style: 'Hawaiian'
+>         is name, Michel's Hawaiian Pizza? YES
 
 ## RSpec Comparison of above example
 
@@ -74,22 +81,22 @@ As a Raketask
           end
         end
         
-        context 'when style is Pepperoni' do
+        context 'when owner is Michel' do
           before :all do
-            @pizza.stub(:style => 'Pepperoni')
+            @pizza.stub(:owner => 'Michel')
           end
     
           it "should be Santoni's Pepperoni Pizza" do
             @pizza.name.should == "Santoni's Pepperoni Pizza"
           end
           
-          context 'when style is Pepperoni' do
+          context 'when style is Hawaiian' do
               before :all do
-                @pizza.stub(:name => 'Santoni's')
+                @pizza.stub(:style => 'Hawaiian')
               end
 
-              it "should be Santoni's Pepperoni Pizza" do
-                @pizza.name.should == "Santoni's Pepperoni Pizza"
+              it "should be Michel's Hawaiian Pizza" do
+                @pizza.name.should == "Michel's Hawaiian Pizza"
               end
           end
         end
@@ -99,17 +106,17 @@ As a Raketask
 > ### Output
 
 ## Keywords
-#### `i am`
+#### `test`
 > Defines the topic of the test
 
 > can be accessed with `topic`
 
-    I am Person
+    test Person
     
 ***
 
 #### `given`
-> Sets the context
+> Set the context
 
     given first_name: 'Deckard', surname: 'Cain'
     
@@ -119,7 +126,7 @@ As a Raketask
     $ topic.surname
     $ => "Cain"
     
-> Clears any previous context
+> Clear any previous context
 
     given first_name: 'Deckard'
     given first_name: 'Flavie'
@@ -134,34 +141,68 @@ As a Raketask
     $ topic.non_existent_method
     $ => "this never existed before"
     
-> Or run your own code
+> Code run inside a block will still automatically stub for you
 
-    given topic.talk_to 'Cain'
+    given { topic.first_name = 'Deckard' }
+    
+> Store a context
 
+    given :deckard_cains_name, name: Name.new(first: 'Deckard', last: 'Cain')
+    
+    given :deckard_cains_name
+    
+> Create a stub chain
+
+    given { topic.name.first = 'Deckard' }
+    
+> Stub chains will also only override the method you stub, while keeping the remaining associations intact
+
+    given :deckard_cains_name { topic.name.first = 'Flavie' }
+    
+    $ topic.name.last
+    $ => "Cain"
+    
 ***
 
 #### `also`
 > Provides a context over the existing context
 
     given first_name: 'Deckard'
-        also surname: 'Cain'
+     also surname: 'Cain'
         
     $ topic.first_name
     $ => "Deckard" 
     
     $ topic.surname
     $ => "Cain"
+    
+> Anything you can do in `given` you can also do in `also`
+
+    given name: Name.new(first: 'Deckard', last: 'Cain')
+     also :flavies_name { topic.name.first = 'Flavie' }
+    
+    given name: Name.new(first: 'Deckard', last: 'Cain')
+     also :flavies_name
+    
+    $ topic.name.first
+    $ => "Flavie"
 
 ***
 
 #### `is?`
-> Creates an assertion
+> Creates an assertation
 
-    is? :first_name, 'Deckard' 
+> If there are no arguments you can do it simply like this
 
-    is? :sum, [2, 2], 4
+    is? first_name: 'Deckard' 
 
-    is? topic.sum(2, 2), 4
+> If there are arguments, put your expression inside a string
+
+    is? 'sum(2,2)', 4
+    
+> You can also use a block
+
+    is? {topic.sum(2, 2) == 4}
 
 ## "This is too easy! How can I make this more challenging?"
 
