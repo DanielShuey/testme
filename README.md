@@ -138,16 +138,18 @@ As a Raketask
 
     given non_existent_method: "this never existed before"
     
-    $ topic.non_existent_method
-    $ => "this never existed before"
+        $ topic.non_existent_method
+        $ => "this never existed before"
     
 > Code run inside a block will still automatically stub for you
 
-    given { topic.first_name = 'Deckard' }
+    given { topic.non_existent_method = "this never existed before" }
     
 > Store a context
 
     given :deckard_cains_name, name: Name.new(first: 'Deckard', last: 'Cain')
+    
+> Load a context
     
     given :deckard_cains_name
     
