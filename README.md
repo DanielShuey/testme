@@ -5,10 +5,6 @@
       given simple: true
         is? simple: true
 
->   Alleviate the 'the big ball of mud'
-
->   Pure Ruby DSL
-
 ## Setup
 
 `gem install testme` (not available yet)
