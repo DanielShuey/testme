@@ -30,8 +30,8 @@ Inline testing
 As a Raketask
 
     task :test do
-        require 'testme'
-        Dir.glob(File.dirname(__FILE__) + '/tests/**/*.test.rb') {|file| require file}
+      require 'testme'
+      Dir.glob(File.dirname(__FILE__) + '/tests/**/*.test.rb') {|file| require file}
     end
 
 ## Detailed Example
