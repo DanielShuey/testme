@@ -116,11 +116,11 @@ As a Raketask
 
     given first_name: 'Deckard', surname: 'Cain'
     
->    $ topic.first_name
->    $ => "Deckard" 
->   
->    $ topic.surname
->    $ => "Cain"
+    $ topic.first_name
+    $ => "Deckard" 
+   
+    $ topic.surname
+    $ => "Cain"
     
 > Clear any previous context
 
@@ -134,8 +134,8 @@ As a Raketask
 
     given non_existent_method: "this never existed before"
     
->   $ topic.non_existent_method
->   $ => "this never existed before"
+    $ topic.non_existent_method
+    $ => "this never existed before"
     
 > Code run inside a block will still automatically stub for you
 
