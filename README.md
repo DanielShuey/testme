@@ -198,11 +198,11 @@ As a Raketask
 
     is? first_name: 'Deckard' 
 
-> If there are arguments, put your expression inside a string
+> If there are arguments, you can put your expression inside a string
 
     is? 'sum(2,2)', 4
     
-> You can also use a block
+> Or you can also use a block
 
     is? {topic.sum(2, 2) == 4}
 
