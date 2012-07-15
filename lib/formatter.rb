@@ -20,7 +20,7 @@ module TestMe
       def is? method, actual, expected
         success = actual == expected
 
-        puts '      ' + method.to_s + ' = ' + expected.to_s + '? ' + (success ? 'YES'.green : "NO, it was '#{actual}'".red) + "\n\n"
+        puts '      is ' + method.to_s + ', ' + expected.to_s + '? ' + (success ? 'YES'.green : "NO, it was '#{actual}'".red) + "\n\n"
       end
 
       def compile
