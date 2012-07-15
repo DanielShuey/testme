@@ -16,6 +16,7 @@
 `gem install iamtest` (not available yet)
 
 Put in Gemfile
+
 `gem "testme", :git => "git@github.com:DanielShuey/testme.git"`
 
 Start testing
