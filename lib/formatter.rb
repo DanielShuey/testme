@@ -6,7 +6,7 @@ module TestMe
       #TODO color_scheme
 
       def test topic
-        puts "  test " + topic.name.bright.color(250, 37, 115)
+        puts "\n  test " + topic.name.bright.color(250, 37, 115)
       end
 
       def given desc=nil, stubs=nil, &block
@@ -29,7 +29,7 @@ module TestMe
 
     private
       def block_to_string &block
-        "(custom block)"
+        "(block)"
       end
 
       def context_to_string desc=nil, stubs=nil, &block
