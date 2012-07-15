@@ -3,6 +3,7 @@ module TestMe
 
     class Verbose
       def topic
+        
       end
 
       def test topic

@@ -1,15 +1,22 @@
 module TestMe
+
+  @formatter = Formatter::Verbose
+
   def topic
     @topic
   end
 
   def test topic
+    @formatter.test topic
+
     @contexts = {}
     @topic_class = topic.name
     @topic = Double.new(Object::const_get(@topic_class).new)
   end
  
   def given desc=nil, stubs=nil, &block
+    @formatter.given desc, stubs, &block
+
     @topic = Double.new(Object::const_get(@topic_class).new)
 
     if desc.class == String || desc.class == Symbol
@@ -27,6 +34,8 @@ module TestMe
   end
 
   def also desc=nil, stubs=nil, &block
+    @formatter.given desc, stubs, &block
+
     if desc.class == String || desc.class == Symbol
       if stubs == nil and block == nil
         load_context desc
