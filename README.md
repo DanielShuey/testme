@@ -11,7 +11,7 @@
 
 ## Setup
 
-`gem install iamtest` (not available yet)
+`gem install testme` (not available yet)
 
 Put in Gemfile
 
@@ -228,7 +228,7 @@ In order to get around not having wrapped contexts we use re-usable contexts, th
 
 Cucumber solves this issue by allowing you to use a sentence structure to load a context. The only problem with this is you have to create steps for even the most specific contexts which are often un-reusable, and these contexts are specified away from the tests. This causes a lot of disorganisation and fragmentation without even the most diligent testers. It makes your test code bloat really fast, and makes it difficult to control.
 
-Iamtest draws on Cucumber's style while staying concise by allowing you to optionally define a description for the context, and just re-specify the description when re-using the context. Allowing the test to be self documenting. Keeping tests cases and logic together reduces fragmentation and makes tests easier to maintain.
+TestMe draws on Cucumber's style while staying concise by allowing you to optionally define a description for the context, and just re-specify the description when re-using the context. Allowing the test to be self documenting. Keeping tests cases and logic together reduces fragmentation and makes tests easier to maintain.
 
 #### The business case issue
 
