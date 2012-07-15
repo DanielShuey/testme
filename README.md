@@ -1,5 +1,5 @@
 # i am test
-*A straight forward testing framework*
+*A minimalistic testing framework*
 
     i am Test
       given simple: true
