@@ -1,6 +1,7 @@
 require File.expand_path('..', __FILE__) + '/spec_helper.rb'
 
-module TestMe
+include TestMe
+#module TestMe
 
   class Mock; end
 
@@ -123,4 +124,4 @@ module TestMe
 
   end
 
-end
+#end

@@ -36,7 +36,7 @@ module TestMe
 
   # Create an assertation
   #    ` is? name: 'Bob' `
-  def is? *args; end
+  def is? *args, &block; end
   # ---------------------------------------------------------------- #
 
   # Run test cases in path
@@ -47,5 +47,5 @@ end
 require 'rainbow'
 
 require 'double'
-require 'logic'
 require 'formatter'
+require 'logic'

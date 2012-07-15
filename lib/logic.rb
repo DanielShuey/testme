@@ -1,6 +1,6 @@
 module TestMe
 
-  @formatter = Formatter::Verbose
+  @formatter = Formatter::Simple.new
 
   def topic
     @topic
@@ -52,20 +52,24 @@ module TestMe
 
   def is? *args, &block
     if block
-      return block.call
+      result = block.call
     else
       if args[0].class == Hash
         method = args[0].first[0]
-        value = args[0].first[1]
-        return topic.send(method) == value
+        expected = args[0].first[1]
+        actual = topic.send(method)
+        result = actual == expected
       end
 
       if args[0].class == String
+        method = args[0]
         actual = eval("@topic.#{args[0]}")
         expected = args[1]
-        return actual == expected
+        result = actual == expected
       end
     end
+
+    @formatter.is? method, actual, expected
   end
 
   def self.run path; end
