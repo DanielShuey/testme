@@ -19,7 +19,7 @@ module TestMe
       end
 
       save_context desc, stubs, true, &block
-    elsif desc.class.name == 'Hash'
+    elsif desc.class == Hash
       stubs = desc
     end
 
@@ -41,21 +41,33 @@ module TestMe
     set_context stubs, &block
   end
 
-  def is? 
-    
+  def is? *args, &block
+    if block
+      return block.call
+    else
+      if args[0].class == Hash
+        method = args[0].first[0]
+        value = args[0].first[1]
+        return topic.send(method) == value
+      end
+
+      if args[0].class == String
+        actual = eval("@topic.#{args[0]}")
+        expected = args[1]
+        return actual == expected
+      end
+    end
   end
 
   def before &block; end
 
-  def self.start!; end
-
   def self.run path; end
 
+private
   class Context
     attr_accessor :name, :block, :stubs, :clear
   end
 
-private
   def save_context name, stubs, clear, &block
     c = Context.new
     c.name = name

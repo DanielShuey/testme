@@ -45,10 +45,6 @@ module TestMe
   def before &block; end
   # ---------------------------------------------------------------- #
 
-  # Start testing immediately
-  def self.start!; end
-  # ---------------------------------------------------------------- #
-
   # Run test cases in path
   def self.run path; end
   # ---------------------------------------------------------------- #

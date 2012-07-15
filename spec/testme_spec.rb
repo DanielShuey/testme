@@ -81,8 +81,45 @@ describe TestMe do
   end
 
   describe '#is?' do
+    context 'when name is bob' do
+      before :each do
+        given name: 'bob'
+        @result = is? name: 'bob'
+      end
 
+      specify('asserts name is bob') { @result.should == true }
+    end
 
+    context 'when block is given' do
+      before :each do
+        given name: 'bob'
+        @result = is? {topic.name == 'bob'}
+      end
 
+      specify('asserts correct result') { @result.should == true }
+    end
   end
+
+  context 'modified topic' do
+    describe '#is?' do
+      context 'when arguments are given' do
+
+        before :each do
+
+          class Parrot
+            def say text
+              return text
+            end
+          end
+
+          test Parrot
+
+          @result = is? 'say(5)', 5
+        end
+
+        specify('asserts correct result') { @result.should == true }
+      end
+    end
+  end
+
 end
