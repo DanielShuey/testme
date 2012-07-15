@@ -39,17 +39,13 @@ module TestMe
   def is? *args; end
   # ---------------------------------------------------------------- #
 
-  # Create a base context
-  # Re-runs every time 'given' is called
-  #    ` before do <block> end `
-  def before &block; end
-  # ---------------------------------------------------------------- #
-
   # Run test cases in path
   def self.run path; end
   # ---------------------------------------------------------------- #
 end
 
 require 'rainbow'
-require 'logic'
+
 require 'double'
+require 'logic'
+require 'formatter'

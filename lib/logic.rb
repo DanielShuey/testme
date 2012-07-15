@@ -18,7 +18,7 @@ module TestMe
         return
       end
 
-      save_context desc, stubs, true, &block
+      save_context desc, stubs, &block
     elsif desc.class == Hash
       stubs = desc
     end
@@ -33,7 +33,7 @@ module TestMe
         return
       end
 
-      save_context desc, stubs, true, &block
+      save_context desc, stubs, &block
     elsif desc.class.name == 'Hash'
       stubs = desc
     end
@@ -59,20 +59,17 @@ module TestMe
     end
   end
 
-  def before &block; end
-
   def self.run path; end
 
 private
   class Context
-    attr_accessor :name, :block, :stubs, :clear
+    attr_accessor :name, :block, :stubs
   end
 
-  def save_context name, stubs, clear, &block
+  def save_context name, stubs, &block
     c = Context.new
     c.name = name
     c.stubs = stubs if stubs
-    c.clear = clear
     c.block = block if block
 
     @contexts[name] = c
