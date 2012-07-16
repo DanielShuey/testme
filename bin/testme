@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+TESTME_RUNNING = true
+
+if File.exists?("#{Dir.pwd}/.testme")
+  require '.testme'
+else
+  require "testme"
+end
+
+puts ARGV.inspect

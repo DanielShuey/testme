@@ -43,27 +43,44 @@ module TestMe
   def is? *args, &block; end
   # ---------------------------------------------------------------- #
 
-  # ---------------------------------------------------------------- #
-  # Optional configuration
-  # ---------------------------------------------------------------- #
-  attr_accessor :config_path # default: '.testme'
-
-  attr_accessor :test_folder # default: '/test/'
-
-  attr_accessor :subfolders  # default: none; e.g ['feature', 'unit']
-                             # allows you to test all scripts in subfolder only
-                             # e.g testme unit
-
-  attr_accessor :formatter   # choose how results are displayed
-                             # options: :console
-
-  attr_accessor :colorscheme # color scheme for console output
-                             # options: default
-  # ---------------------------------------------------------------- #
 end
 
-require 'rainbow'
+# ---------------------------------------------------------------- #
+# Optional configuration
+# ---------------------------------------------------------------- #
+TESTME_CONFIG  = '.testme' unless defined? TESTME_CONFIG 
+  # default: '.testme'
 
-require 'double'
-require 'formatter'
-require 'logic'
+TESTME_DIR     = '/test/'  unless defined? TESTME_DIR
+  # default: '/test/'
+
+TESTME_SUBDIRS = []        unless defined? TESTME_SUBDIRS
+  # default: none; e.g ['feature', 'unit']
+  # allows you to test all scripts in subfolder only
+  # e.g testme unit
+
+TESTME_FORMAT  = :console  unless defined? TESTME_FORMAT
+  # choose how results are displayed
+  # options: :console
+  # default: :console
+
+TESTME_COLORS  = :default  unless defined? TESTME_COLORS
+  # color scheme for console output
+  # options: :default
+  # default: :default
+
+# ---------------------------------------------------------------- #
+
+# ---------------------------------------------------------------- #
+# This is here to disable inline tests at runtime
+# ---------------------------------------------------------------- #
+if TESTME_RUNNING
+  # Gems
+  require 'rainbow'
+
+  # TestMe Library
+  require 'double'
+  require 'formatter'
+  require 'logic'
+end
+# ---------------------------------------------------------------- #
