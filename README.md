@@ -242,6 +242,7 @@ TestMe draws on Cucumber's style while staying concise by allowing you to option
 
  - Block to String
  - Color Schemes
+ - HTML Report
 
 ## Credit
 
