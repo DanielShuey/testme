@@ -79,7 +79,7 @@
 >         is name, Michel's Hawaiian Pizza? YES
 >
 >       given :hawaiian_style:
->        also { topic.owner = 'Santoni' }
+>        also (block)
 >         is name, Santoni's Hawaiian Pizza? YES
 
 ## Keywords
@@ -237,6 +237,11 @@ TestMe draws on Cucumber's style while staying concise by allowing you to option
 > BA's will also often miss the subtle nuances required in testing, such as writing test cases to cover security, the speed of test runs, and declarative tests for maintenance.
 
 > Instead we should have BA's write our stories, and testers should translate this into concise well-defined tests. Paired development between tester and BA may be a counter-argument, but often this means simply giving up and allowing the BA to make a few mistakes in order to encourage the process, as being too picky will often discourage the BA. I for one would be not willing to make such a sacrifice.
+
+### TODO
+
+ - Block to String
+ - Color Schemes
 
 ## Credit
 
