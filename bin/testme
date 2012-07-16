@@ -3,9 +3,30 @@
 TESTME_RUNNING = true
 
 if File.exists?("#{Dir.pwd}/.testme")
-  require '.testme'
+  load "#{Dir.pwd}/.testme"
 else
   require "testme"
 end
 
-puts ARGV.inspect
+if ARGV.empty?
+  Dir["#{Dir.pwd}/#{TESTME_DIR}/#{arg}/**/*.rb"].each{|f| require f } 
+
+else
+  ARGV.each do |arg|
+    @file = "#{Dir.pwd}/#{arg}"
+
+    # Check if directory
+    if File.directory? @file
+      Dir["#{@file}/**/*.rb"].each{|f| require f } 
+    elsif File.exists? @file
+      if @file.include? '.test.rb'
+        testme do
+          load @file
+        end
+      else
+        require @file
+      end
+    end
+  end
+
+end

@@ -1,7 +1,24 @@
 module TestMe
   module Formatter
 
-    class Simple
+    def self.selected
+      case TESTME_FORMAT
+        when :none
+          return None.new
+        when :console
+          return Console.new
+      end
+    end
+
+    class None
+      def test topic; end
+      def given *args, &block; end
+      def also *args, &block; end
+      def is? *args; end
+      def compile; end
+    end
+
+    class Console
 
       #TODO color_scheme
 

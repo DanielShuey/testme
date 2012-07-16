@@ -46,18 +46,15 @@ module TestMe
 end
 
 # ---------------------------------------------------------------- #
+# Inline Testing
+# ---------------------------------------------------------------- #
+def testme &block; end
+
+# ---------------------------------------------------------------- #
 # Optional configuration
 # ---------------------------------------------------------------- #
-TESTME_CONFIG  = '.testme' unless defined? TESTME_CONFIG 
-  # default: '.testme'
-
 TESTME_DIR     = '/test/'  unless defined? TESTME_DIR
   # default: '/test/'
-
-TESTME_SUBDIRS = []        unless defined? TESTME_SUBDIRS
-  # default: none; e.g ['feature', 'unit']
-  # allows you to test all scripts in subfolder only
-  # e.g testme unit
 
 TESTME_FORMAT  = :console  unless defined? TESTME_FORMAT
   # choose how results are displayed
@@ -74,7 +71,7 @@ TESTME_COLORS  = :default  unless defined? TESTME_COLORS
 # ---------------------------------------------------------------- #
 # This is here to disable inline tests at runtime
 # ---------------------------------------------------------------- #
-if TESTME_RUNNING
+if defined? TESTME_RUNNING
   # Gems
   require 'rainbow'
 
