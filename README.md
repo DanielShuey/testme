@@ -1,4 +1,4 @@
-# Test Me
+# Test Me (BETA)
 *A minimalistic testing framework*
 
     test Me
