@@ -205,6 +205,15 @@ As a Raketask
 > Or you can also use a block
 
     is? {topic.sum(2, 2) == 4}
+    
+***
+
+#### `before`
+> Creates a base context
+
+> Remains until `test` is invoked again
+
+    before { topic.do_some_factory_stuff }
 
 ## "This is too easy! How can I make this more challenging?"
 
