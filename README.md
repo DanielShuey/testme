@@ -58,49 +58,6 @@ As a Raketask
 >       also style: 'Hawaiian'
 >         is name, Michel's Hawaiian Pizza? YES
 
-## RSpec Comparison of above example
-
-    describe Pizza
-      before do
-        @pizza = Factory.build :pizza
-      end
-    
-      describe '#name'
-        context 'when style is Pepperoni and owner is Santoni' do
-          before :all do
-            @pizza.stub(:style => 'Pepperoni')
-            @pizza.stub(:owner => 'Santoni')
-          end
-    
-          it "should be Santoni's Pepperoni Pizza" do
-            @pizza.name.should == "Santoni's Pepperoni Pizza"
-          end
-        end
-        
-        context 'when owner is Michel' do
-          before :all do
-            @pizza.stub(:owner => 'Michel')
-          end
-    
-          it "should be Santoni's Pepperoni Pizza" do
-            @pizza.name.should == "Santoni's Pepperoni Pizza"
-          end
-          
-          context 'when style is Hawaiian' do
-            before :all do
-              @pizza.stub(:style => 'Hawaiian')
-            end
-  
-            it "should be Michel's Hawaiian Pizza" do
-              @pizza.name.should == "Michel's Hawaiian Pizza"
-            end
-          end
-        end
-      end
-    end
-
-> ### Output
-
 ## Keywords
 #### `test`
 > Defines the topic of the test
