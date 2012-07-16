@@ -28,6 +28,8 @@
     $ testme /test/account.test.rb
     
 #### Inline testing
+    class Account
+    end
 
     testme do
       test Account
