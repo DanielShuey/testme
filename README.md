@@ -84,12 +84,12 @@ default: /test/
       given { topic.name = 'Michel' } # Context resets
         is? name: "Santoni's Pepperoni Pizza"
         
-      also :hawaiian_style style: 'Hawaiian' # Add on to previous context
+       also :hawaiian_style style: 'Hawaiian' # Add on to previous context
         is? name: "Michels's Hawaiian Pizza"
       
       given :hawaiian_style
-        also { topic.owner = 'Santoni' }
-          is? name: "Santoni's Hawaiian Pizza"
+       also { topic.owner = 'Santoni' }
+        is? name: "Santoni's Hawaiian Pizza"
       
 > ### Output
 
@@ -100,7 +100,7 @@ default: /test/
 >       given style: 'Pepperoni'
 >         is name, Santoni's Pepperoni Pizza? NO, it was Michel's Pizza! 
 >
->       also :hawaiian_style: style: 'Hawaiian'
+>        also :hawaiian_style: style: 'Hawaiian'
 >         is name, Michel's Hawaiian Pizza? YES
 >
 >       given :hawaiian_style:
