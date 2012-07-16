@@ -240,9 +240,10 @@ TestMe draws on Cucumber's style while staying concise by allowing you to option
 
 ## TODO
 
- - Block to String
- - Color Schemes
- - HTML Report
+ - Block to string
+ - Method stubbing
+ - Color schemes
+ - HTML report
 
 ## Credit
 
