@@ -16,6 +16,7 @@
 ## Run
 
 #### Test all
+default: /test/
 
     $ testme
 
