@@ -45,12 +45,12 @@
         return name
       end
       
-      # Test what_is_my_name
-      testme do
+      testme 
+      {
         test Account
           given name: 'Fred'
             is? what_is_my_name: 'Fred'
-      end
+      }
       
     end
     
