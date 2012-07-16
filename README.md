@@ -192,7 +192,7 @@ As a Raketask
 ***
 
 #### `is?`
-> Creates an assertation
+> Creates an assertion
 
 > If there are no arguments you can do it simply like this
 
