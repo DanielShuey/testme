@@ -272,6 +272,8 @@ TestMe draws on Cucumber's style while staying concise by allowing you to option
 
 ## Credit
 
+Daniel Shuey - daniel.shuey@gmail.com
+
 ## License
 
 Copyright 2012 Daniel Shuey
