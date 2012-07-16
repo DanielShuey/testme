@@ -137,6 +137,10 @@ As a Raketask
     $ topic.non_existent_method
     $ => "this never existed before"
     
+> Create a context using a block
+
+    given { topic.talk_to 'Flavie' }
+    
 > Code run inside a block will still automatically stub for you
 
     given { topic.non_existent_method = "this never existed before" }
