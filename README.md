@@ -238,7 +238,7 @@ TestMe draws on Cucumber's style while staying concise by allowing you to option
 
 > Instead we should have BA's write our stories, and testers should translate this into concise well-defined tests. Paired development between tester and BA may be a counter-argument, but often this means simply giving up and allowing the BA to make a few mistakes in order to encourage the process, as being too picky will often discourage the BA. I for one would be not willing to make such a sacrifice.
 
-### TODO
+## TODO
 
  - Block to String
  - Color Schemes
