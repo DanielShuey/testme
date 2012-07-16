@@ -75,8 +75,6 @@ module TestMe
     result
   end
 
-  def self.run path; end
-
 private
   class Context
     attr_accessor :name, :block, :stubs
