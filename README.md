@@ -30,8 +30,10 @@
 #### Inline testing
 
     testme do
-      //test code here
+      test Account
     end
+
+>
 
     class Account
 
@@ -43,7 +45,7 @@
       
       # Test what_is_my_name
       testme {
-        test PlayerModel
+        test Account
           given name: 'Fred'
             is? what_is_my_name: 'Fred'
       }
