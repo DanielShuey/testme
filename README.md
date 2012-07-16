@@ -45,13 +45,28 @@
         return name
       end
       
-      testme 
-      {
+      testme {
         test Account
-          given name: 'Fred'
-            is? what_is_my_name: 'Fred'
+        given name: 'Fred'
+        is? what_is_my_name: 'Fred'
       }
       
+    end
+    
+>
+
+    class Account
+      extend TestMe; test Account
+      
+      field :name
+
+      def what_is_my_name
+        return name
+      end
+      
+      #what_is_my_name
+        given name: 'Fred'
+        is? what_is_my_name: 'Fred'
     end
     
 ## Detailed Example
