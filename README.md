@@ -22,13 +22,18 @@ default: /test/
 
 #### Test all in directory
     
-    $ testme /test/features
+    $ testme test/features
 
 #### Test file
 
-    $ testme /test/account.test.rb
+    $ testme test/account.test.rb
     
 #### Inline testing
+    
+    $ testme app/models
+    
+>
+
     class Account
     end
 
