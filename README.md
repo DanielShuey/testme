@@ -1,9 +1,13 @@
-# Test Me (BETA)
+# Test Me
 *A minimalistic testing framework*
 
     test Me
       given simple: true
         is? simple: true
+
+## Phase
+
+BETA: a.k.a *bleeding edge*
 
 ## Setup
 
