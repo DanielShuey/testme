@@ -9,31 +9,47 @@
 
 `gem install testme` (not available yet)
 
-Put in Gemfile
+#### Gemfile
 
 `gem "testme", :git => "git@github.com:DanielShuey/testme.git"`
 
-Test file
+## Run
 
-    include TestMe
+#### Test all
+
+    $ testme
+
+#### Test all in directory
     
-Inline testing
+    $ testme /test/features
 
-    // Some code here
+#### Test file
 
-    module TestMe
+    $ testme /test/account.test.rb
     
+#### Inline testing
+
+    testme do
+      //test code here
+    end
+
+    class Account
+
+      field :name
+
+      def what_is_my_name
+        return name
+      end
+      
+      # Test what_is_my_name
+      testme {
+        test PlayerModel
+          given name: 'Fred'
+            is? what_is_my_name: 'Fred'
+      }
+      
     end
     
-    // Some more code here
-    
-As a Raketask
-
-    task :test do
-      require 'testme'
-      Dir.glob(File.dirname(__FILE__) + '/tests/**/*.test.rb') {|file| require file}
-    end
-
 ## Detailed Example
 
     test Pizza
@@ -43,20 +59,28 @@ As a Raketask
       given { topic.name = 'Michel' } # Context resets
         is? name: "Santoni's Pepperoni Pizza"
         
-      also style: 'Hawaiian' # Add on to previous context
+      also :hawaiian_style style: 'Hawaiian' # Add on to previous context
         is? name: "Michels's Hawaiian Pizza"
-
+      
+      given :hawaiian_style
+        also { topic.owner = 'Santoni' }
+          is? name: "Santoni's Hawaiian Pizza"
+      
 > ### Output
 
->     i am Pizza
+>     test Pizza
 >       given style: 'Pepperoni', owner: 'Santoni'
 >         is name, Santoni's Pepperoni Pizza? YES
 >
 >       given style: 'Pepperoni'
 >         is name, Santoni's Pepperoni Pizza? NO, it was Michel's Pizza! 
 >
->       also style: 'Hawaiian'
+>       also :hawaiian_style: style: 'Hawaiian'
 >         is name, Michel's Hawaiian Pizza? YES
+>
+>       given :hawaiian_style:
+>        also { topic.owner = 'Santoni' }
+>         is name, Santoni's Hawaiian Pizza? YES
 
 ## Keywords
 #### `test`
