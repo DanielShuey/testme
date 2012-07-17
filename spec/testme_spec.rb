@@ -95,7 +95,7 @@ describe 'TestMe' do
       end
     end
 
-    context 'when block is given' do
+    context 'when Block is given' do
       before :each do
         given name: 'bob'
         @result = is? {topic.name == 'bob'}
@@ -105,26 +105,36 @@ describe 'TestMe' do
     end
   end
 
+
   context 'modified topic' do
+  
+    before :each do
+      class ArgCounter
+        def count *args
+          return args.size
+        end
+      end
+      
+      test ArgCounter
+    end
+  
     describe '#is?' do
       context 'when arguments are given' do
 
         before :each do
-
-          class Parrot
-            def say text
-              return text
-            end
-          end
-
-          test Parrot
-
-          @result = is? 'say(5)', 5
+          @result = is? 'count(1)', 1
         end
 
         specify('asserts correct result') { @result.should == true }
       end
+      
+      context 'when Symbol is given' do
+        specify('parses 0 arguments'){(is? :count, 0).should == true}
+        specify('parses one argument'){(is? :count, 1, 1).should == true}
+        specify('parses multiple arguments'){(is? :count, [1,1,1], 3).should == true}
+      end
     end
+    
   end
   
   describe '#test' do

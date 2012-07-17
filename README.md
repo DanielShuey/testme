@@ -3,7 +3,7 @@
 
     test Me
       given simple: true
-        is? simple: true
+        is? :simple
 
 ## Phase
 
@@ -82,26 +82,26 @@ default: /test/
 ## Detailed Example
 
     test Pizza
-      given owner: 'Santoni', style: 'Pepperoni'
+      given owner: 'Santoni', style: 'Pepperoni' # Set the context
         is? name: "Santoni's Pepperoni Pizza"
     
-      given { topic.name = 'Michel' } # Context resets
+      given name: 'Michel' # Reset the context
         is? name: "Santoni's Pepperoni Pizza"
         
-       also :hawaiian_style style: 'Hawaiian' # Add on to previous context
+       also :hawaiian_style, style: 'Hawaiian' # Add on to previous context and save it
         is? name: "Michels's Hawaiian Pizza"
       
-      given :hawaiian_style
-       also { topic.owner = 'Santoni' }
+      given :hawaiian_style # Reload the saved context
+       also { topic.owner = 'Santoni' } # Use a block instead
         is? name: "Santoni's Hawaiian Pizza"
       
 > ### Output
 
 >     test Pizza
->       given style: 'Pepperoni', owner: 'Santoni'
+>       given owner: 'Santoni', style: 'Pepperoni'
 >         is name, Santoni's Pepperoni Pizza? YES
 >
->       given style: 'Pepperoni'
+>       given name: 'Michel'
 >         is name, Santoni's Pepperoni Pizza? NO, it was Michel's Pizza! 
 >
 >        also :hawaiian_style: style: 'Hawaiian'
@@ -115,10 +115,20 @@ default: /test/
 #### `test`
 > Defines the topic of the test
 
-> can be accessed with `topic`
+    test Account
+>
+    test App::Account
 
-    test Person
+> This automatically creates an instance which you access with `topic`
+
+    topic.name
     
+> Both modules and classes can be used for the test topic
+
+    test AccountHelper
+    
+> (At the moment you can only test instance methods, class methods will also be testable in a later update)
+
 ***
 
 #### `given`
@@ -207,14 +217,28 @@ default: /test/
 > If there are no arguments you can do it simply like this
 
     is? first_name: 'Deckard' 
+    
+> Or like this
+
+    is? :first_name, 'Deckard'
 
 > If there are arguments, you can put your expression inside a string
 
     is? 'sum(2,2)', 4
     
+> Or like this
+
+    is? :sum, [2,2], 4
+    
 > Or you can also use a block
 
     is? {topic.sum(2, 2) == 4}
+    
+> If the expected value is `true` you don't have to state it
+ 
+    is? 'simple?'
+>
+    is? :simple?
     
 ***
 
@@ -269,6 +293,7 @@ TestMe draws on Cucumber's style while staying concise by allowing you to option
 
 ## TODO
 
+ - Invoke class methods
  - Block to string
  - Method stubbing
  - Color schemes

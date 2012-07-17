@@ -77,16 +77,28 @@ module TestMe
         method = args[0].first[0]
         expected = args[0].first[1]
         actual = topic.send(method)
-        result = actual == expected
       end
 
       if args[0].class == String
         method = args[0]
         actual = eval("@topic.#{args[0]}")
         expected = args[1]
-        expected = true if expected.nil?
-        result = actual == expected
       end
+      
+      if args[0].class == Symbol
+        method = args[0]
+        if args[2]
+          params = args[1] if args[1]
+          expected = args[2] if args[2]
+          actual = topic.send method, *params
+        else
+          expected = args[1]
+          actual = topic.send method
+        end
+      end
+      
+      expected = true if expected.nil?
+      result = actual == expected
     end
 
     @@formatter.is? method, actual, expected
