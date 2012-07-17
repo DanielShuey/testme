@@ -91,8 +91,12 @@ module TestMe
     case format
       when :none
         return Formatter::None.new
+      when :text
+        return Formatter::Text.new
       when :console
         return Formatter::Console.new
+      when :html
+        return Formatter::HTML.new
     end
   end
 

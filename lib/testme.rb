@@ -58,7 +58,7 @@ TESTME_DIR     = '/test/'  unless defined? TESTME_DIR
 
 TESTME_FORMAT  = :console  unless defined? TESTME_FORMAT
   # choose how results are displayed
-  # options: :console
+  # options: :none, :text, :console
   # default: :console
 
 TESTME_COLORS  = :default  unless defined? TESTME_COLORS
