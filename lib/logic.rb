@@ -10,7 +10,7 @@ module TestMe
   end
 
   def test topic
-    @@formatter ||= select_format(TESTME_FORMAT)
+    @@formatter ||= Formatter::create(TESTME_FORMAT)
   
     @@formatter.test topic
     
@@ -85,19 +85,6 @@ module TestMe
   
   def before &block
     @before = block
-  end
-  
-  def select_format format
-    case format
-      when :none
-        return Formatter::None.new
-      when :text
-        return Formatter::Text.new
-      when :console
-        return Formatter::Console.new
-      when :html
-        return Formatter::HTML.new
-    end
   end
 
 private

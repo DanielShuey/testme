@@ -1,5 +1,3 @@
-select_format :color
-
 module TestMe::Formatter
   class Text
     private

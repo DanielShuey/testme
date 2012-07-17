@@ -1,6 +1,19 @@
 module TestMe
   module Formatter
 
+    def self.create format
+      case format
+        when :none
+          return Formatter::None.new
+        when :text
+          return Formatter::Text.new
+        when :console
+          return Formatter::Console.new
+        when :html
+          return Formatter::HTML.new
+      end
+    end
+ 
     class None
       def test topic; end
       def given *args, &block; end
