@@ -10,15 +10,24 @@ module TestMe
   end
 
   def test topic
-    @@formatter ||= Formatter::create(TESTME_FORMAT)
-  
-    @@formatter.test topic
-    
+    @topic = nil
     @before = nil
     @contexts = {}
-    @topic_class = class_from_string(topic.name)
+  
+    @@formatter ||= Formatter::create(TESTME_FORMAT)
+    @@formatter.test topic
     
-    @topic = Double.new(@topic_class.new)
+    @topic_class = topic
+    
+    if topic.instance_of? Module
+      @o = Object.new
+      @o.extend topic
+      @topic = Double.new(@o) 
+    end
+
+    @topic = Double.new(topic.new) if topic.instance_of? Class
+    
+    raise Exception, "Topic needs to be a Class or a Module" unless @topic
   end
  
   def given desc=nil, stubs=nil, &block

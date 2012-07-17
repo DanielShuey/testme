@@ -126,6 +126,19 @@ describe 'TestMe' do
       end
     end
   end
+  
+  describe '#test' do
+    before :each do
+      module Mock2
+        def hello; return 'hello'; end
+      end
+    end
+    
+    it 'test double of Module' do
+      test Mock2
+      topic.hello.should == 'hello'
+    end
+  end
 
 end
 
