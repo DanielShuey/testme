@@ -6,9 +6,8 @@ Gem::Specification.new do |s|
   s.name              = 'testme'
 
   s.version           = begin
-      revision = (`git log --pretty=format:'' | wc -l`.to_f / 10).to_s.split('.')
-      revision[0] = "0" + revision[0] if revision[0].length < 2
-      "0.#{revision[0]}.#{revision[1]}"
+      revision = (`git log --pretty=format:'' | wc -l`.to_f / 20).round(2).to_s
+      "0.#{revision}"
     end
 
   s.date              = Date.today.to_s
