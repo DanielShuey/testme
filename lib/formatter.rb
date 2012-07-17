@@ -85,7 +85,7 @@ module TestMe
       #TODO color_scheme
 
       def test topic
-        log "\n  test " + topic.name.bright.color(250, 37, 115)
+        log "\n  test ".bright + topic.name.bright.color(250, 37, 115)
       end
 
       def given desc=nil, stubs=nil, &block
@@ -99,7 +99,7 @@ module TestMe
       def is? method, actual, expected
         success = actual == expected
 
-        log 'is ' + method.to_s + ', ' + expected.to_s + '? ' + (success ? 'YES'.green : "NO, it was '#{actual}'".red) + "\n\n"
+        log '      is '.bright + method.to_s + ', ' + expected.to_s.yellow + '? ' + (success ? 'YES'.bright.green : "NO, it was '#{actual}'".bright.red) + "\n\n"
       end
 
       def compile

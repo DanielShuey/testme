@@ -16,8 +16,8 @@ module TestMe
     
     @before = nil
     @contexts = {}
-    @topic_class = topic.name
-    @topic = Double.new(Object::const_get(@topic_class).new)
+    @topic_class = class_from_string(topic.name)
+    @topic = Double.new(@topic_class.new)
   end
  
   def given desc=nil, stubs=nil, &block
@@ -25,7 +25,7 @@ module TestMe
   
     @@formatter.given desc, stubs, &block
 
-    @topic = Double.new(Object::const_get(@topic_class).new)
+    @topic = Double.new(@topic_class.new)
 
     if desc.class == String || desc.class == Symbol
       if stubs == nil and block == nil
@@ -90,6 +90,12 @@ module TestMe
 private
   class Context
     attr_accessor :name, :block, :stubs
+  end
+  
+  def class_from_string(str)
+    str.split('::').inject(Object) do |mod, class_name|
+      mod.const_get(class_name)
+    end
   end
 
   def save_context name, stubs, &block

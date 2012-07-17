@@ -74,6 +74,7 @@ TESTME_COLORS  = :default  unless defined? TESTME_COLORS
 if defined? TESTME_RUNNING
   # Gems
   require 'rainbow'
+  require 'colorize'
 
   # TestMe Library
   require 'double'
