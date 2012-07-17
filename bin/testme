@@ -9,7 +9,7 @@ else
 end
 
 if ARGV.empty?
-  Dir["#{Dir.pwd}/#{TESTME_DIR}/#{arg}/**/*.rb"].each{|f| require f } 
+  Dir["#{Dir.pwd}/#{TESTME_DIR}/**/*.rb"].each{|f| require f } 
 
 else
   ARGV.each do |arg|

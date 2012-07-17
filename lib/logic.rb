@@ -4,21 +4,25 @@ def testme &block
 end
 
 module TestMe
-  @@formatter = Formatter::selected
 
   def topic
     @topic
   end
 
   def test topic
+    @@formatter ||= select_format(TESTME_FORMAT)
+  
     @@formatter.test topic
-
+    
+    @before = nil
     @contexts = {}
     @topic_class = topic.name
     @topic = Double.new(Object::const_get(@topic_class).new)
   end
  
   def given desc=nil, stubs=nil, &block
+    @before.call if @before
+  
     @@formatter.given desc, stubs, &block
 
     @topic = Double.new(Object::const_get(@topic_class).new)
@@ -56,7 +60,7 @@ module TestMe
 
   def is? *args, &block
     if block
-      method = true
+      method = block
       result = block.call
     else
       if args[0].class == Hash
@@ -77,6 +81,19 @@ module TestMe
     @@formatter.is? method, actual, expected
 
     result
+  end
+  
+  def before &block
+    @before = block
+  end
+  
+  def select_format format
+    case format
+      when :none
+        return Formatter::None.new
+      when :console
+        return Formatter::Console.new
+    end
   end
 
 private

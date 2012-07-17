@@ -1,15 +1,6 @@
 module TestMe
   module Formatter
 
-    def self.selected
-      case TESTME_FORMAT
-        when :none
-          return None.new
-        when :console
-          return Console.new
-      end
-    end
-
     class None
       def test topic; end
       def given *args, &block; end
