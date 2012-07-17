@@ -17,6 +17,7 @@ module TestMe
     @before = nil
     @contexts = {}
     @topic_class = class_from_string(topic.name)
+    
     @topic = Double.new(@topic_class.new)
   end
  
@@ -74,6 +75,7 @@ module TestMe
         method = args[0]
         actual = eval("@topic.#{args[0]}")
         expected = args[1]
+        expected = true if expected.nil?
         result = actual == expected
       end
     end
