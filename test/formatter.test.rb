@@ -1,4 +1,4 @@
-TestMe::select_format :color
+select_format :color
 
 module TestMe::Formatter
   class Text

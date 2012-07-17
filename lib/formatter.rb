@@ -19,21 +19,21 @@ module TestMe
     
     class Text
       def test topic
-        puts "test " + topic.name
+        log "test " + topic.name
       end
 
       def given desc=nil, stubs=nil, &block
-        puts "given " + context_to_string(desc, stubs, &block)
+        log "given " + context_to_string(desc, stubs, &block)
       end
 
       def also desc=nil, stubs=nil, &block
-        puts "also " + context_to_string(desc, stubs, &block)
+        log "also " + context_to_string(desc, stubs, &block)
       end
 
       def is? method, actual, expected
         success = actual == expected
 
-        puts 'is ' + method.to_s + ', ' + expected.to_s + '? ' + (success ? 'YES' : "NO, it was '#{actual}'")
+        log 'is ' + method.to_s + ', ' + expected.to_s + '? ' + (success ? 'YES' : "NO, it was '#{actual}'")
       end
 
       def compile
@@ -72,21 +72,21 @@ module TestMe
       #TODO color_scheme
 
       def test topic
-        puts "\n  test " + topic.name.bright.color(250, 37, 115)
+        log "\n  test " + topic.name.bright.color(250, 37, 115)
       end
 
       def given desc=nil, stubs=nil, &block
-        puts "    given " + context_to_string(desc, stubs, &block)
+        log "    given " + context_to_string(desc, stubs, &block)
       end
 
       def also desc=nil, stubs=nil, &block
-        puts "     also " + context_to_string(desc, stubs, &block)
+        log "     also " + context_to_string(desc, stubs, &block)
       end
 
       def is? method, actual, expected
         success = actual == expected
 
-        puts 'is ' + method.to_s + ', ' + expected.to_s + '? ' + (success ? 'YES'.green : "NO, it was '#{actual}'".red) + "\n\n"
+        log 'is ' + method.to_s + ', ' + expected.to_s + '? ' + (success ? 'YES'.green : "NO, it was '#{actual}'".red) + "\n\n"
       end
 
       def compile
@@ -96,6 +96,10 @@ module TestMe
     private
       def block_to_string &block
         "(block)"
+      end
+      
+      def log msg
+        puts msg
       end
 
       def context_to_string desc=nil, stubs=nil, &block
