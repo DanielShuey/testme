@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
   s.require_paths = %w(lib)
 
   s.add_runtime_dependency('rainbow', ['>= 1.1.3'])
+  s.add_runtime_dependency('colorize', ['>= 0.5.8'])
 end
