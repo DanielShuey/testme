@@ -10,7 +10,7 @@ end
 
 if ARGV.empty?
   testme do
-    Dir["#{Dir.pwd}/#{TESTME_DIR}/**/*.rb"].each{|f| require f } 
+    Dir["#{Dir.pwd}/#{TESTME_DIR}/**/*.rb"].each{|f| load f } 
   end
 
 else
@@ -19,7 +19,7 @@ else
 
     # Check if directory
     if File.directory? @file
-      Dir["#{@file}/**/*.rb"].each{|f| require f } 
+      Dir["#{@file}/**/*.rb"].each{|f| load f } 
     elsif File.exists? @file
       if @file.include? '.test.rb'
         testme do
