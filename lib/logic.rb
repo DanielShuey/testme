@@ -89,7 +89,7 @@ module TestMe
         params = [args[1]] if args.size == 3
         params = args[1] if args[1].is_a? Array
         expected = args.size == 3 ? args[2] : args[1]
-        actual = topic.send args[0], *params
+        actual = topic.send(args[0], *params)
       
         method = args[0].to_s + (params ? '(' + (params.is_a?(Array) ? params.join(',') : params.to_s) + ')' : '')
       end
