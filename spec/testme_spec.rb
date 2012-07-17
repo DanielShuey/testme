@@ -110,9 +110,8 @@ describe 'TestMe' do
   
     before :each do
       class ArgCounter
-        def count *args
-          return args.size
-        end
+        def count *args; return args.size; end
+        def true; return true; end
       end
       
       test ArgCounter
@@ -129,8 +128,10 @@ describe 'TestMe' do
       end
       
       context 'when Symbol is given' do
+        specify('parses 0 arguments'){(is? :true).should == true}
         specify('parses 0 arguments'){(is? :count, 0).should == true}
-        specify('parses one argument'){(is? :count, 1, 1).should == true}
+        specify('parses 1 argument with auto-true'){(is? :count, [1]).should == false}
+        specify('parses 1 argument with answer'){(is? :count, 1, 1).should == true}
         specify('parses multiple arguments'){(is? :count, [1,1,1], 3).should == true}
       end
     end

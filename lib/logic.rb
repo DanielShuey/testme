@@ -86,16 +86,12 @@ module TestMe
       end
       
       if args[0].class == Symbol
-        if args[2]
-          params = args[1] if args[1]
-          expected = args[2] if args[2]
-          actual = topic.send args[0], *params
-          method = args[0].to_s + '(' + (args[1].is_a?(Array) ? args[1].join(',') : args[1].to_s) + ')'
-        else
-          expected = args[1] if args[1]
-          actual = topic.send args[0]
-          method = args[0].to_s
-        end
+        params = [args[1]] if args.size == 3
+        params = args[1] if args[1].is_a? Array
+        expected = args.size == 3 ? args[2] : args[1]
+        actual = topic.send args[0], *params
+      
+        method = args[0].to_s + (params ? '(' + (params.is_a?(Array) ? params.join(',') : params.to_s) + ')' : '')
       end
       
       expected = true if expected.nil?
