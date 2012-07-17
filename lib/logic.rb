@@ -86,14 +86,15 @@ module TestMe
       end
       
       if args[0].class == Symbol
-        method = args[0]
         if args[2]
           params = args[1] if args[1]
           expected = args[2] if args[2]
-          actual = topic.send method, *params
+          actual = topic.send args[0], *params
+          method = args[0].to_s + '(' + (args[1].is_a?(Array) ? args[1].join(',') : args[1].to_s) + ')'
         else
-          expected = args[1]
-          actual = topic.send method
+          expected = args[1] if args[1]
+          actual = topic.send args[0]
+          method = args[0].to_s
         end
       end
       
