@@ -5,10 +5,6 @@
       given simple: true
         is? :simple
 
-## Phase
-
-BETA: a.k.a *bleeding edge*
-
 ## Setup
 
 `gem install testme` (not available yet)
@@ -258,17 +254,27 @@ default: /test/
 
 There is something about you that troubles me. Your manner is strange for a lonely code warrior.
 
+## How long till version 1.0?
+
+When these features are completed
+
+ - Test class methods (only instance methods can be tested at this time)
+ - Blocks need to parsed back into a string
+ - Test more complex method stubbing
+ - Console color schemes
+ - HTML reporting
+
 ## Design Decisions
 
 #### Context Sensitive
 
-I found that a lot of complexity with setting up tests is due to wrapping things in contexts. As tests are most often executed sequentially from the top down, this is often unnecessary.
+I found that a lot of complexity with setting up tests is due to wrapping things in contexts. As tests are often executed sequentially from the top down anyway, this is often unnecessary.
 
 This also eliminates teardown and tearup sequences, and can save a lot of time. Instead of executing our setup for every single test case, we only setup exactly what is needed once, and adjust as necessary between test cases. This works because we often readjust every state required to run the next test in order to maintain clarity. Meaning being able to hop in-between contexts is often unnecessary.
 
 #### Self Documenting Tests
 
-We are seeing less and less the use of code comments, and instead focusing more on self documenting code, tests and stories to describe our functionality.
+TestMe aims to reduce the use of code comments and test descriptions, and instead focusing more on self documenting code to describe our functionality.
 
 Especially when describing contexts there is no need to re-describe them. Abstracting explicit tests and describing them with behaviour also makes tests much more difficult to maintain or delete.
 
@@ -282,10 +288,10 @@ TestMe draws on Cucumber's style while staying concise by allowing you to option
 
 #### The business case issue
 
-> Some people may be quick to judge that this is not in the vein of Cucumber's philosophy of being able to have BA's   write the stories that are then directly implemented into the program. To me this doesn't seem like a great idea for the following reasons. 
+> Some people may be quick to judge that this is not in the vein of Cucumber's philosophy of being able to have Business Analysts   write the stories that are then directly implemented into the program. To me this doesn't seem like a great idea for the following reasons. 
 
 > #### The big ball of mud
-> The fragmentation caused by separation of step definitions and stories also causes problems with test maintenance. A testers role does not involve just writing tests, it also involves deleting them. Even in professional teams you will often find thousands of lines of dormant tests in a project.
+> The fragmentation caused by separation of step definitions and stories also causes problems with test maintenance. A testers role does not involve just writing tests, it also involves deleting them. Even in professional teams you will often find thousands of lines of dormant test code in a large project.
 
 > #### Performance, Security and Maintenance
 > It is the programmers job to translate the business rules into code, and it should be no different for tests. A bad coder writes spaghetti code, a bad tester writes "spaghetti tests".
@@ -294,15 +300,7 @@ TestMe draws on Cucumber's style while staying concise by allowing you to option
 
 > BA's will also often miss the subtle nuances required in testing, such as writing test cases to cover security, the speed of test runs, and declarative tests for maintenance.
 
-> Instead we should have BA's write our stories, and testers should translate this into concise well-defined tests. Paired development between tester and BA may be a partial solution, but this means often giving up and allowing the BA to make a few mistakes in order to encourage the process, as being too picky will often result in a throwing of hands in the air and saying "well, I give up". 
-
-## TODO
-
- - Invoke class methods
- - Block to string
- - Method stubbing
- - Color schemes
- - HTML report
+> Instead we should have BA's write our stories, and testers should translate this into concise well-defined tests. Paired development between tester and BA may be a partial solution, but this means often giving up and allowing the BA to make a few mistakes in order to encourage the process, as being too picky will often result in too much discouragement. 
 
 ## Credit
 
