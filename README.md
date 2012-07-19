@@ -7,9 +7,7 @@
 
 ## Setup
 
-`gem install testme` (not available yet)
-
-#### Gemfile
+#### Put in your Gemfile
 
 `gem "testme", :git => "git@github.com:DanielShuey/testme.git"`
 
