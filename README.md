@@ -284,22 +284,6 @@ Cucumber solves this issue by allowing you to use a sentence structure to load a
 
 TestMe draws on Cucumber's style while staying concise by allowing you to optionally define a description for the context, and just re-specify the description when re-using the context. Allowing the test to be self documenting. Keeping tests cases and logic together reduces fragmentation and makes tests easier to maintain.
 
-#### The business case issue
-
-> Some people may be quick to judge that this is not in the vein of Cucumber's philosophy of being able to have Business Analysts   write the stories that are then directly implemented into the program. To me this doesn't seem like a great idea for the following reasons. 
-
-> #### The big ball of mud
-> The fragmentation caused by separation of step definitions and stories also causes problems with test maintenance. A testers role does not involve just writing tests, it also involves deleting them. Even in professional teams you will often find thousands of lines of dormant test code in a large project.
-
-> #### Performance, Security and Maintenance
-> It is the programmers job to translate the business rules into code, and it should be no different for tests. A bad coder writes spaghetti code, a bad tester writes "spaghetti tests".
-
-> I could not fathom the performance, security and maintenance issues we would have if we allowed BA's to write our code. The same goes for tests, when we have BA's write our tests for us, we run into a lot of those problems.
-
-> BA's will also often miss the subtle nuances required in testing, such as writing test cases to cover security, the speed of test runs, and declarative tests for maintenance.
-
-> Instead we should have BA's write our stories, and testers should translate this into concise well-defined tests. Paired development between tester and BA may be a partial solution, but this means often giving up and allowing the BA to make a few mistakes in order to encourage the process, as being too picky will often result in too much discouragement. 
-
 ## Credit
 
 Daniel Shuey - daniel.shuey@gmail.com
