@@ -280,7 +280,7 @@ Especially when describing contexts there is no need to re-describe them. Abstra
 
 In order to get around not having wrapped contexts we use re-usable contexts, that can be defined during the creation of the context itself. With other testing frameworks we have to define a method, however if you want to stay BDD this means you have to re-describe the context when you re-use it. 
 
-Cucumber solves this issue by allowing you to use a sentence structure to load a context. The only problem with this is you have to create steps for even the most specific contexts which are often un-reusable, and these contexts are specified away from the tests. This causes a lot of disorganisation and fragmentation without even the most diligent testers. It makes your test code bloat really fast, and makes it difficult to control.
+Cucumber solves this issue by allowing you to use a sentence structure to load a context. The only problem with this is you have to create steps for even the most specific contexts which are often un-reusable, and these contexts are specified away from the tests. This causes a lot of disorganisation and fragmentation without even the most diligent testers. It makes your test code bloat really fast, and makes it difficult to control. Even in professional teams, you will often see thousands of lines of dormant test code in a large project that nobody knew even existed.
 
 TestMe draws on Cucumber's style while staying concise by allowing you to optionally define a description for the context, and just re-specify the description when re-using the context. Allowing the test to be self documenting. Keeping tests cases and logic together reduces fragmentation and makes tests easier to maintain.
 
