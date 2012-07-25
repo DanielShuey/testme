@@ -80,20 +80,13 @@ module TestMe
         expected = args[0].first[1]
         actual = topic.send(method)
       end
-
-      if args[0].class == String
-        method = args[0]
-        actual = eval("@topic.#{args[0]}")
-        expected = args[1]
-      end
       
       if args[0].class == Symbol
-        params = [args[1]] if args.size == 3
-        params = args[1] if args[1].is_a? Array
-        expected = args.size == 3 ? args[2] : args[1]
+        params = args[0].args
+        expected = args[1]
         actual = topic.send(args[0], *params)
       
-        method = args[0].to_s + (params ? '(' + (params.is_a?(Array) ? params.join(',') : params.to_s) + ')' : '')
+        method = args[0].to_s + (params ? '(' + params.join(',') + ')' : '')
       end
       
       expected = true if expected.nil?

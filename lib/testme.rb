@@ -38,7 +38,7 @@ module TestMe
 
   # Create an assertion
   #  ` is? name: 'Flavie'                     `
-  #  ` is? 'inventory(1), 'Arrows'            `
+  #  ` is? :inventory[1], 'Arrows'            `
   #  ` is? { topic.inventory(1) == 'Arrows' } `
   def is? *args, &block; end
   # ---------------------------------------------------------------- #
@@ -77,6 +77,7 @@ if defined? TESTME_RUNNING
   require 'colorize'
 
   # TestMe Library
+  require 'symbol'
   require 'double'
   require 'formatter'
   require 'logic'
