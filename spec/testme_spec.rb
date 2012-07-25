@@ -133,6 +133,7 @@ describe 'TestMe' do
         specify('parses 0 arguments'){(is? :true).should == true}
         specify('parses 0 arguments'){(is? :count, 0).should == true}
         specify('parses 1 argument with auto-true'){(is? :count[1]).should == false}
+        specify('parses 1 argument (string) with auto-true'){(is? :count['1']).should == false}
         specify('parses 1 argument with answer'){(is? :count[1], 1).should == true}
         specify('parses multiple arguments'){(is? :count[1,1,1], 3).should == true}
       end
