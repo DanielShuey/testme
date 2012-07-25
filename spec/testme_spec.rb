@@ -104,6 +104,17 @@ describe 'TestMe' do
       specify('asserts correct result') { @result.should == true }
     end
   end
+  
+  context 'class methods' do
+    before :each do
+      class ClassMethods
+        def self.hello
+        end
+      end
+      
+      test ClassMethods, :self
+    end
+  end
 
 
   context 'modified topic' do

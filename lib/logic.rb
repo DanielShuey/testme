@@ -20,12 +20,14 @@ module TestMe
     @topic_class = topic
     
     if topic.instance_of? Module
-      @o = Object.new
-      @o.extend topic
-      @topic = Double.new(@o) 
+      o = Object.new
+      o.extend topic
+      @topic = Double.new(o) 
     end
-
-    @topic = Double.new(topic.new) if topic.instance_of? Class
+    
+    if topic.instance_of? Class
+      @topic = Double.new(topic.new)
+    end
     
     raise Exception, "Topic needs to be a Class or a Module" unless @topic
   end
