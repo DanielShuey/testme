@@ -209,33 +209,18 @@ default: /test/
 
 #### `is?`
 > Creates an assertion
-
-> If there are no arguments you can do it simply like this
-
-    is? first_name: 'Deckard' 
     
-> Or like this
-
     is? :first_name, 'Deckard'
 
-> If there are arguments, you can put your expression inside a string
+> If there are arguments, do like so
 
-    is? 'sum(2,2)', 4
-    
-> Or put your arguments in an array
-(Although the Array is not necessary if there is only one parameter)
-
-    is? :sum, [2,2], 4
+    is? :sum[2,2], 4
     
 > Or you can also use a block
 
     is? {topic.sum(2, 2) == 4}
     
 > If the expected value is `true` you don't have to state it
- 
-    is? 'simple?'
-    
->
 
     is? :simple?
     
