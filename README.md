@@ -77,17 +77,17 @@ default: /test/
 
     test Pizza
       given owner: 'Santoni', style: 'Pepperoni' # Set the context
-        is? name: "Santoni's Pepperoni Pizza"
+        is? :name, "Santoni's Pepperoni Pizza"
     
       given name: 'Michel' # Reset the context
-        is? name: "Santoni's Pepperoni Pizza"
+        is? :name, "Santoni's Pepperoni Pizza"
         
        also :hawaiian_style, style: 'Hawaiian' # Add on to previous context and save it
-        is? name: "Michels's Hawaiian Pizza"
+        is? :name, "Michels's Hawaiian Pizza"
       
       given :hawaiian_style # Reload the saved context
        also { topic.owner = 'Santoni' } # Use a block instead
-        is? name: "Santoni's Hawaiian Pizza"
+        is? :name, "Santoni's Hawaiian Pizza"
       
 > ### Output
 
