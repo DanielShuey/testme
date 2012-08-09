@@ -1,34 +1,63 @@
 #!/usr/bin/env ruby
 
-TESTME_RUNNING = true
+if ARGV[0] == 'setup'
 
-if File.exists?("#{Dir.pwd}/.testme")
-  load "#{Dir.pwd}/.testme"
+  puts 'Creating bootstrap ".testme"'
+
+  File.open('./.testme', 'w') {|f| f.write(
+%q[require "rubygems"
+require "bundler"
+require "bundler/setup"
+Bundler.require :default, :test
+
+TESTME_DIR = '/test/'
+TESTME_FORMAT = :console
+TESTME_COLORS = :default]
+)}
+
+  puts 'Creating test folder "/test/"'
+
+  Dir::mkdir('./test/') unless File.directory?("./test/") || File.exists?("./test/")
+  
+  File.open('./test/app.test.rb', 'w') {|f| f.write(
+""
+)}
+
+  puts 'Setup complete'
+
 else
-  require "testme"
-end
 
-if ARGV.empty?
-  testme do
-    Dir["#{Dir.pwd}/#{TestMe::TESTME_DIR}/**/*.rb"].each{|f| load f } 
+  TESTME_RUNNING = true
+
+  if File.exists?("#{Dir.pwd}/.testme")
+    load "#{Dir.pwd}/.testme"
+  else
+    require "testme"
   end
 
-else
-  ARGV.each do |arg|
-    @file = "#{Dir.pwd}/#{arg}"
+  if ARGV.empty?
+    testme do
+      Dir["#{Dir.pwd}/#{TestMe::TESTME_DIR}/**/*.rb"].each{|f| load f } 
+    end
 
-    # Check if directory
-    if File.directory? @file
-      Dir["#{@file}/**/*.rb"].each{|f| load f } 
-    elsif File.exists? @file
-      if @file.include? '.test.rb'
-        testme do
-          load @file
+  else
+    ARGV.each do |arg|
+      @file = "#{Dir.pwd}/#{arg}"
+
+      # Check if directory
+      if File.directory? @file
+        Dir["#{@file}/**/*.rb"].each{|f| load f } 
+      elsif File.exists? @file
+        if @file.include? '.test.rb'
+          testme do
+            load @file
+          end
+        else
+          require @file
         end
-      else
-        require @file
       end
     end
+
   end
 
 end
