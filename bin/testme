@@ -5,12 +5,12 @@ if ARGV[0] == 'setup'
   puts 'Creating bootstrap "/.testme"'
 
   File.open("./.testme", "w") {|f| f.write(
-%q[require "testme"
-
-TESTME_DIR = '/test/'
+%q[TESTME_DIR = '/test/'
 TESTME_SUFFIX = '.test.rb'
 TESTME_FORMAT = :console
-TESTME_COLORS = :default]
+TESTME_COLORS = :default
+
+require "testme"]
 )} unless File.exists?("./.testme")
 
   puts 'Creating test folder "/test"'

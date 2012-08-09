@@ -52,24 +52,24 @@
 *Default .testme boiler plate on setup*
 *this might need to be reconfigured to cater to your project*
 
-    require "testme"
-
     TESTME_DIR = '/test/'
     TESTME_SUFFIX = '.test.rb'
     TESTME_FORMAT = :console
-    TESTME_COLORS = :default 
+    TESTME_COLORS = :default
+
+    require "testme"
 
 #### Example config with bundler
-
-    require "rubygems"
-    require "bundler"
-    require "bundler/setup"
-    Bundler.require :default, :test
 
     TESTME_DIR = '/test/'
     TESTME_SUFFIX = '.test.rb'
     TESTME_FORMAT = :console
     TESTME_COLORS = :default
+
+    require "rubygems"
+    require "bundler"
+    require "bundler/setup"
+    Bundler.require :default, :test
 
 ## Config
 
