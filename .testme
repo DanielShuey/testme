@@ -1,7 +1,4 @@
-require "rubygems"
-require "bundler"
-require "bundler/setup"
-Bundler.require :default, :test
+require "testme"
 
 TESTME_DIR = '/test/'
 TESTME_FORMAT = :console

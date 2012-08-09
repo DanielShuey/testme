@@ -2,23 +2,22 @@
 
 if ARGV[0] == 'setup'
 
-  puts 'Creating bootstrap ".testme"'
+  puts 'Creating bootstrap "/.testme"'
 
   File.open('./.testme', 'w') {|f| f.write(
-%q[require "rubygems"
-require "bundler"
-require "bundler/setup"
-Bundler.require :default, :test
+%q[require "testme"
 
 TESTME_DIR = '/test/'
 TESTME_FORMAT = :console
 TESTME_COLORS = :default]
 )}
 
-  puts 'Creating test folder "/test/"'
+  puts 'Creating test folder "/test"'
 
   Dir::mkdir('./test/') unless File.directory?("./test/") || File.exists?("./test/")
   
+  puts 'Creating empty test file "/app.test.rb"'
+
   File.open('./test/app.test.rb', 'w') {|f| f.write(
 ""
 )}

@@ -41,9 +41,33 @@
 
 `gem install testme`
 
-*then in your project root directory*
+*Then in your project root directory*
 
 `testme setup`
+
+    /.testme
+    /test/
+    /test/app.test.rb
+
+*Default .testme boiler plate on setup*
+*this might need to be reconfigured to cater to your project*
+
+    require "testme"
+
+    TESTME_DIR = '/test/'
+    TESTME_FORMAT = :console
+    TESTME_COLORS = :default 
+
+#### Example config with bundler
+
+    require "rubygems"
+    require "bundler"
+    require "bundler/setup"
+    Bundler.require :default, :test
+
+    TESTME_DIR = '/test/'
+    TESTME_FORMAT = :console
+    TESTME_COLORS = :default
 
 ## Config
 
