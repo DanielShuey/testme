@@ -11,23 +11,27 @@
 
 `gem "testme", :git => "git@github.com:DanielShuey/testme.git"`
 
+## Config
+
+Put a .testme bootstrap file in your project root
+
+*in ~/project_root/.testme*
+
+    require "rubygems"
+    require "bundler"
+    require "bundler/setup"
+    Bundler.require :default, :test
+    
+Or just run `bundle exec` before you run the command
+
+    $ bundle exec testme
+
 ## Run
 
 #### Test all
 default: /test/
 
     $ testme
->
-    $ bundle exec testme   
->
-Or put a .testme bootstrap file in your project root
-
-`in ~/project_root/.testme`
-
-    require "rubygems"
-    require "bundler"
-    require "bundler/setup"
-    Bundler.require :default, :test
 
 #### Test all in directory
     
