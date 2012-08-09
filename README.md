@@ -18,7 +18,7 @@ default: /test/
 
     $ testme
 >
-    # bundle exec testme   
+    $ bundle exec testme   
 >
 Or put a .testme bootstrap file in your project root
 
