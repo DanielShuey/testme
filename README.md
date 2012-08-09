@@ -41,24 +41,15 @@
 
 `gem install testme`
 
+*then in your project root directory*
+
+`testme setup`
+
 ## Config
 
-##### Put a `.testme` file in your project root to set up a bootstrap
- 
-### Config Boiler plate
+In your project root will be a `.testme` file, this is your bootstrap that runs before your tests
 
-*in ~/project_root/.testme*
-
-    require "rubygems"
-    require "bundler"
-    require "bundler/setup"
-    Bundler.require :default, :test
-    
-    TESTME_DIR = '/test/'
-    TESTME_FORMAT = :console
-    TESTME_COLORS = :default
-    
-***
+The `/test/` folder will house all your test files, you can change this in your bootstrap
 
 ### Config options
 
