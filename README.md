@@ -48,7 +48,7 @@ TESTME_COLORS = :default
 ## Run
 
 #### Test all
-default test folder: /test/**/*
+default test folder: `/test/**/*`
 
     $ testme
 
