@@ -3,7 +3,39 @@
 
     test Me
       given simple: true
-        is? :simple
+        is? :simple  
+
+## Detailed Example
+
+    test Pizza
+      given owner: 'Santoni', style: 'Pepperoni' # Set the context
+        is? :name, "Santoni's Pepperoni Pizza"
+    
+      given name: 'Michel' # Reset the context
+        is? :name, "Santoni's Pepperoni Pizza"
+        
+       also :hawaiian_style, style: 'Hawaiian' # Add on to previous context and save it
+        is? :name, "Michels's Hawaiian Pizza"
+      
+      given :hawaiian_style # Reload the saved context
+       also { topic.owner = 'Santoni' } # Use a block instead
+        is? :name, "Santoni's Hawaiian Pizza"
+      
+> ### Output
+
+>     test Pizza
+>       given owner: 'Santoni', style: 'Pepperoni'
+>         is name, Santoni's Pepperoni Pizza? YES
+>
+>       given name: 'Michel'
+>         is name, Santoni's Pepperoni Pizza? NO, it was Michel's Pizza! 
+>
+>        also :hawaiian_style: style: 'Hawaiian'
+>         is name, Michel's Hawaiian Pizza? YES
+>
+>       given :hawaiian_style:
+>        also (block)
+>         is name, Santoni's Hawaiian Pizza? YES
 
 ## Setup
 
@@ -44,6 +76,8 @@ TESTME_COLORS = :default
 * color scheme for console output
 * options: :default
 * default: :default
+
+***
 
 ## Run
 
@@ -106,38 +140,6 @@ default test folder: `/test/**/*`
         given name: 'Fred'
         is? what_is_my_name: 'Fred'
     end
-    
-## Detailed Example
-
-    test Pizza
-      given owner: 'Santoni', style: 'Pepperoni' # Set the context
-        is? :name, "Santoni's Pepperoni Pizza"
-    
-      given name: 'Michel' # Reset the context
-        is? :name, "Santoni's Pepperoni Pizza"
-        
-       also :hawaiian_style, style: 'Hawaiian' # Add on to previous context and save it
-        is? :name, "Michels's Hawaiian Pizza"
-      
-      given :hawaiian_style # Reload the saved context
-       also { topic.owner = 'Santoni' } # Use a block instead
-        is? :name, "Santoni's Hawaiian Pizza"
-      
-> ### Output
-
->     test Pizza
->       given owner: 'Santoni', style: 'Pepperoni'
->         is name, Santoni's Pepperoni Pizza? YES
->
->       given name: 'Michel'
->         is name, Santoni's Pepperoni Pizza? NO, it was Michel's Pizza! 
->
->        also :hawaiian_style: style: 'Hawaiian'
->         is name, Michel's Hawaiian Pizza? YES
->
->       given :hawaiian_style:
->        also (block)
->         is name, Santoni's Hawaiian Pizza? YES
 
 ## Keywords
 #### `test`
