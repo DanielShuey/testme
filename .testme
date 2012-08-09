@@ -1,0 +1,8 @@
+boot :test, '/test' do
+  TESTME_DIR = '/test/'
+  TESTME_SUFFIX = '.test.rb'
+  TESTME_FORMAT = :console
+  TESTME_COLORS = :default
+end
+
+require "testme"

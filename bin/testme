@@ -1,9 +1,22 @@
 #!/usr/bin/env ruby
 
+@testme_boot = {}
+def boot name, folder, &block
+  @testme_boot[name.to_sym] = [folder, block]
+end
+
+def testme_load filepath
+  if @file.include?(TestMe::TESTME_SUFFIX)
+    testme do
+      load filepath
+    end
+  else
+    load filepath
+  end
+end
+
 if ARGV[0] == 'setup'
-
   puts 'Creating bootstrap "/.testme"'
-
   File.open("./.testme", "w") {|f| f.write(
 %q[TESTME_DIR = '/test/'
 TESTME_SUFFIX = '.test.rb'
@@ -12,61 +25,46 @@ TESTME_COLORS = :default
 
 require "testme"]
 )} unless File.exists?("./.testme")
-
   puts 'Creating test folder "/test"'
-
   Dir::mkdir('./test/') unless File.directory?("./test/") || File.exists?("./test/")
-  
   puts 'Creating empty test file "/app.test.rb"'
-
-  File.open('./test/app.test.rb', 'w') {|f| f.write(
-""
-)} unless File.exists?("./.test/app.test.rb")
-
+  File.open('./test/app.test.rb', 'w') {|f| f.write("")} unless File.exists?("./.test/app.test.rb")
   puts 'Setup complete'
 
+  exit
+end
+
+TESTME_INIT = true
+
+if File.exists?("#{Dir.pwd}/.testme")
+  load "#{Dir.pwd}/.testme"
 else
+  require "testme"
+end
 
-  TESTME_INIT = true
-
-  if File.exists?("#{Dir.pwd}/.testme")
-    load "#{Dir.pwd}/.testme"
-  else
-    require "testme"
+TESTME_RUNNING = true
+  
+if ARGV.empty?
+  testme do
+    Dir["#{Dir.pwd}/#{TestMe::TESTME_DIR}/**/*#{TestMe::TESTME_SUFFIX}"].each{|f| load f } 
   end
+elsif ARGV[0][0] == ':'
+  o = @testme_boot[ARGV[0][1..-1].to_sym][1]
+  o.call
 
-  TESTME_RUNNING = true
+  Dir["#{o[0]}/**/*#{TestMe::TESTME_SUFFIX}"].each do |f| 
+    testme_load(f)
+  end
+else
+  ARGV.each do |arg|
+    @file = "#{Dir.pwd}/#{arg}"
 
-  if ARGV.empty?
-    testme do
-      Dir["#{Dir.pwd}/#{TestMe::TESTME_DIR}/**/*#{TestMe::TESTME_SUFFIX}"].each{|f| load f } 
-    end
-
-  else
-    ARGV.each do |arg|
-      @file = "#{Dir.pwd}/#{arg}"
-
-      # Check if directory
-      if File.directory?(@file)
-        Dir["#{@file}/**/*.rb"].each do |f| 
-          if @file.include?(TestMe::TESTME_SUFFIX)
-            testme do
-              load @file
-            end
-          else
-            load @file
-          end
-        end
-      elsif File.exists?(@file)
-        if @file.include?(TestMe::TESTME_SUFFIX)
-          testme do
-            load @file
-          end
-        else
-          load @file
-        end
+    if File.directory?(@file)
+      Dir["#{@file}/**/*#{TestMe::TESTME_SUFFIX}"].each do |f| 
+        testme_load(@file)
       end
+    elsif File.exists?(@file)
+      testme_load(@file)
     end
   end
-
 end
