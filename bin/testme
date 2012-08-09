@@ -21,7 +21,7 @@ TESTME_COLORS = :default]
 
   File.open('./test/app.test.rb', 'w') {|f| f.write(
 ""
-)} unless File.exists?("./.test/app#{TestMe::TESTME_SUFFIX}")
+)} unless File.exists?("./.test/app.test.rb")
 
   puts 'Setup complete'
 
@@ -47,17 +47,18 @@ else
       @file = "#{Dir.pwd}/#{arg}"
 
       # Check if directory
-      if File.directory? @file
+      if File.directory?(@file)
         Dir["#{@file}/**/*.rb"].each do |f| 
-          if @file.include? TestMe::TESTME_SUFFIX
+          if @file.include?(TestMe::TESTME_SUFFIX)
             testme do
               load @file
             end
           else
             load @file
           end
-      elsif File.exists? @file
-        if @file.include? TestMe::TESTME_SUFFIX
+        end
+      elsif File.exists?(@file)
+        if @file.include?(TestMe::TESTME_SUFFIX)
           testme do
             load @file
           end
@@ -66,7 +67,6 @@ else
         end
       end
     end
-
   end
 
 end
