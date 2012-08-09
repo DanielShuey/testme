@@ -54,7 +54,7 @@
     require "rubygems"
     require "bundler"
     require "bundler/setup"
-    Bundler.require :default
+    Bundler.require :default, :test
     
     TESTME_DIR = '/test/'
     TESTME_FORMAT = :console
@@ -84,19 +84,19 @@ TESTME_COLORS = :default
 #### Test all
 default test folder: `/test/**/*`
 
-    $ testme
+    $ bundle exec testme
 
 #### Test all in directory
     
-    $ testme test/features
+    $ bundle exec testme test/features
 
 #### Test file
 
-    $ testme test/account.test.rb
+    $ bundle exec testme test/account.test.rb
     
 #### Inline testing
     
-    $ testme app/models
+    $ bundle exec testme app/models
     
 >
 
