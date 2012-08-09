@@ -14,6 +14,21 @@
 ## Config
 
 ##### Put a `.testme` file in your project root to set up a bootstrap
+ 
+### Config Boiler plate
+
+*in ~/project_root/.testme*
+
+    require "rubygems"
+    require "bundler"
+    require "bundler/setup"
+    Bundler.require :default, :test
+    
+    TESTME_DIR = '/test/'
+    TESTME_FORMAT = :console
+    TESTME_COLORS = :default
+    
+***
 
 ### Config options
 
@@ -29,21 +44,6 @@ TESTME_COLORS = :default
 * color scheme for console output
 * options: :default
 * default: :default
- 
-***
- 
-### Config Boiler plate
-
-*in ~/project_root/.testme*
-
-    require "rubygems"
-    require "bundler"
-    require "bundler/setup"
-    Bundler.require :default, :test
-    
-    TESTME_DIR = '/test/'
-    TESTME_FORMAT = :console
-    TESTME_COLORS = :default
 
 ## Run
 
