@@ -54,17 +54,17 @@ def testme &block; end
 # Optional configuration
 # ---------------------------------------------------------------- #
 module TestMe
-  TESTME_DIR     = ::TESTME_DIR    ? ::TESTME_DIR : '/test/'
+  TESTME_DIR     = defined?(::TESTME_DIR)    ? ::TESTME_DIR : '/test/'
     # default: '/test/'
 
-  TESTME_SUFFIX  = ::TESTME_SUFFIX ? ::TESTME_SUFFIX : '.test.rb'
+  TESTME_SUFFIX  = defined?(::TESTME_SUFFIX) ? ::TESTME_SUFFIX : '.test.rb'
 
-  TESTME_FORMAT  = ::TESTME_FORMAT ? ::TESTME_FORMAT : :console
+  TESTME_FORMAT  = defined?(::TESTME_FORMAT) ? ::TESTME_FORMAT : :console
     # choose how results are displayed
     # options: :none, :text, :console
     # default: :console
 
-  TESTME_COLORS  = ::TESTME_COLORS ? ::TESTME_COLORS : :default
+  TESTME_COLORS  = defined?(::TESTME_COLORS) ? ::TESTME_COLORS : :default
     # color scheme for console output
     # options: :default
     # default: :default
