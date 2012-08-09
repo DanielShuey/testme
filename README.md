@@ -17,6 +17,17 @@
 default: /test/
 
     $ testme
+>
+    # bundle exec testme   
+>
+Or put a .testme bootstrap file in your project root
+
+`in ~/project_root/.testme`
+
+    require "rubygems"
+    require "bundler"
+    require "bundler/setup"
+    Bundler.require :default, :test
 
 #### Test all in directory
     
