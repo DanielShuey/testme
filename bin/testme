@@ -10,7 +10,7 @@ end
 
 if ARGV.empty?
   testme do
-    Dir["#{Dir.pwd}/#{TESTME_DIR}/**/*.rb"].each{|f| load f } 
+    Dir["#{Dir.pwd}/#{TestMe::TESTME_DIR}/**/*.rb"].each{|f| load f } 
   end
 
 else

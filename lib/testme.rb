@@ -53,18 +53,20 @@ def testme &block; end
 # ---------------------------------------------------------------- #
 # Optional configuration
 # ---------------------------------------------------------------- #
-TESTME_DIR     = '/test/'  unless defined? TESTME_DIR
-  # default: '/test/'
+module TestMe
+  TESTME_DIR     = '/test/'  unless defined? TESTME_DIR
+    # default: '/test/'
 
-TESTME_FORMAT  = :console  unless defined? TESTME_FORMAT
-  # choose how results are displayed
-  # options: :none, :text, :console
-  # default: :console
+  TESTME_FORMAT  = :console  unless defined? TESTME_FORMAT
+    # choose how results are displayed
+    # options: :none, :text, :console
+    # default: :console
 
-TESTME_COLORS  = :default  unless defined? TESTME_COLORS
-  # color scheme for console output
-  # options: :default
-  # default: :default
+  TESTME_COLORS  = :default  unless defined? TESTME_COLORS
+    # color scheme for console output
+    # options: :default
+    # default: :default
+end
 
 # ---------------------------------------------------------------- #
 

@@ -1,0 +1,8 @@
+require "rubygems"
+require "bundler"
+require "bundler/setup"
+Bundler.require :default, :test
+
+TESTME_DIR = '/test/'
+TESTME_FORMAT = :console
+TESTME_COLORS = :default
