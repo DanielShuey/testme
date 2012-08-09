@@ -20,7 +20,7 @@ TESTME_COLORS = :default]
 
   File.open('./test/app.test.rb', 'w') {|f| f.write(
 ""
-)}
+)} unless File.exists?("./.test/app.test.rb")
 
   puts 'Setup complete'
 
