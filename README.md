@@ -39,9 +39,7 @@
 
 ## Setup
 
-#### Put in your Gemfile
-
-`gem "testme", :git => "git@github.com:DanielShuey/testme.git"`
+`gem install testme`
 
 ## Config
 
@@ -84,19 +82,19 @@ TESTME_COLORS = :default
 #### Test all
 default test folder: `/test/**/*`
 
-    $ bundle exec testme
+    $ testme
 
 #### Test all in directory
     
-    $ bundle exec testme test/features
+    $ testme test/features
 
 #### Test file
 
-    $ bundle exec testme test/account.test.rb
+    $ testme test/account.test.rb
     
 #### Inline testing
     
-    $ bundle exec testme app/models
+    $ testme app/models
 
 ##### Inline testing examples
     
