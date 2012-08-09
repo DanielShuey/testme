@@ -13,7 +13,26 @@
 
 ## Config
 
-Put a .testme bootstrap file in your project root
+##### Put a `.testme` file in your project root to set up a bootstrap
+
+### Config options
+
+TESTME_DIR = '/test/'
+* default: '/test/'
+
+TESTME_FORMAT = :console
+* choose how results are displayed
+* options: :none, :text, :console
+* default: :console
+
+TESTME_COLORS = :default
+* color scheme for console output
+* options: :default
+* default: :default
+ 
+***
+ 
+### Config Boiler plate
 
 *in ~/project_root/.testme*
 
@@ -22,14 +41,14 @@ Put a .testme bootstrap file in your project root
     require "bundler/setup"
     Bundler.require :default, :test
     
-Or just run `bundle exec` before you run the command
-
-    $ bundle exec testme
+    TESTME_DIR = '/test/'
+    TESTME_FORMAT = :console
+    TESTME_COLORS = :default
 
 ## Run
 
 #### Test all
-default: /test/
+default test folder: /test/**/*
 
     $ testme
 
