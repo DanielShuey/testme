@@ -54,7 +54,7 @@
     require "rubygems"
     require "bundler"
     require "bundler/setup"
-    Bundler.require :default, :test
+    Bundler.require :default
     
     TESTME_DIR = '/test/'
     TESTME_FORMAT = :console
