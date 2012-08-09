@@ -1,6 +1,8 @@
 def testme &block
-  extend TestMe
-  block.call
+  if defined? TESTME_RUNNING
+    extend TestMe
+    block.call
+  end
 end
 
 module TestMe

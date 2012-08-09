@@ -54,15 +54,17 @@ def testme &block; end
 # Optional configuration
 # ---------------------------------------------------------------- #
 module TestMe
-  TESTME_DIR     = '/test/'  unless defined? TESTME_DIR
+  TESTME_DIR     = ::TESTME_DIR    ? ::TESTME_DIR : '/test/'
     # default: '/test/'
 
-  TESTME_FORMAT  = :console  unless defined? TESTME_FORMAT
+  TESTME_SUFFIX  = ::TESTME_SUFFIX ? ::TESTME_SUFFIX : '.test.rb'
+
+  TESTME_FORMAT  = ::TESTME_FORMAT ? ::TESTME_FORMAT : :console
     # choose how results are displayed
     # options: :none, :text, :console
     # default: :console
 
-  TESTME_COLORS  = :default  unless defined? TESTME_COLORS
+  TESTME_COLORS  = ::TESTME_COLORS ? ::TESTME_COLORS : :default
     # color scheme for console output
     # options: :default
     # default: :default
@@ -73,7 +75,7 @@ end
 # ---------------------------------------------------------------- #
 # This is here to disable inline tests at runtime
 # ---------------------------------------------------------------- #
-if defined? TESTME_RUNNING
+if defined? TESTME_INIT
   # Gems
   require 'rainbow'
   require 'colorize'

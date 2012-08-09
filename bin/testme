@@ -8,6 +8,7 @@ if ARGV[0] == 'setup'
 %q[require "testme"
 
 TESTME_DIR = '/test/'
+TESTME_SUFFIX = '.test.rb'
 TESTME_FORMAT = :console
 TESTME_COLORS = :default]
 )} unless File.exists?("./.testme")
@@ -20,13 +21,13 @@ TESTME_COLORS = :default]
 
   File.open('./test/app.test.rb', 'w') {|f| f.write(
 ""
-)} unless File.exists?("./.test/app.test.rb")
+)} unless File.exists?("./.test/app#{TestMe::TESTME_SUFFIX}")
 
   puts 'Setup complete'
 
 else
 
-  TESTME_RUNNING = true
+  TESTME_INIT = true
 
   if File.exists?("#{Dir.pwd}/.testme")
     load "#{Dir.pwd}/.testme"
@@ -34,9 +35,11 @@ else
     require "testme"
   end
 
+  TESTME_RUNNING = true
+
   if ARGV.empty?
     testme do
-      Dir["#{Dir.pwd}/#{TestMe::TESTME_DIR}/**/*.rb"].each{|f| load f } 
+      Dir["#{Dir.pwd}/#{TestMe::TESTME_DIR}/**/*#{TestMe::TESTME_SUFFIX}"].each{|f| load f } 
     end
 
   else
@@ -45,14 +48,21 @@ else
 
       # Check if directory
       if File.directory? @file
-        Dir["#{@file}/**/*.rb"].each{|f| load f } 
+        Dir["#{@file}/**/*.rb"].each do |f| 
+          if @file.include? TestMe::TESTME_SUFFIX
+            testme do
+              load @file
+            end
+          else
+            load @file
+          end
       elsif File.exists? @file
-        if @file.include? '.test.rb'
+        if @file.include? TestMe::TESTME_SUFFIX
           testme do
             load @file
           end
         else
-          require @file
+          load @file
         end
       end
     end

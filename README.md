@@ -55,6 +55,7 @@
     require "testme"
 
     TESTME_DIR = '/test/'
+    TESTME_SUFFIX = '.test.rb'
     TESTME_FORMAT = :console
     TESTME_COLORS = :default 
 
@@ -66,6 +67,7 @@
     Bundler.require :default, :test
 
     TESTME_DIR = '/test/'
+    TESTME_SUFFIX = '.test.rb'
     TESTME_FORMAT = :console
     TESTME_COLORS = :default
 
