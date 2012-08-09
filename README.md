@@ -97,6 +97,8 @@ default test folder: `/test/**/*`
 #### Inline testing
     
     $ bundle exec testme app/models
+
+##### Inline testing examples
     
 >
 
