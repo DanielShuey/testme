@@ -15,7 +15,7 @@ def testme_load filepath
   end
 end
 
-if ARGV[0] == 'setup'
+def testme_setup
   puts 'Creating bootstrap "/.testme"'
   File.open("./.testme", "w") {|f| f.write(
 %q[TESTME_DIR = '/test/'
@@ -30,7 +30,10 @@ require "testme"]
   puts 'Creating empty test file "/app.test.rb"'
   File.open('./test/app.test.rb', 'w') {|f| f.write("")} unless File.exists?("./.test/app.test.rb")
   puts 'Setup complete'
+end
 
+if ARGV[0] == 'setup'
+  testme_setup
   exit
 end
 
