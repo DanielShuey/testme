@@ -1,12 +1,4 @@
-def testme &block
-  if defined? TESTME_RUNNING
-    extend TestMe
-    block.call
-  end
-end
-
 module TestMe
-
   def topic
     @topic
   end
@@ -16,7 +8,7 @@ module TestMe
     @before = nil
     @contexts = {}
   
-    @@formatter ||= Formatter::create(TESTME_FORMAT)
+    @@formatter ||= Formatter::create(testme.format)
     @@formatter.test topic
     
     @topic_class = topic

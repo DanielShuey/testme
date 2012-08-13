@@ -5,6 +5,7 @@
 #********************************************************************#
 
 module TestMe
+  # Dummy interface for inline tests - you don't want tests to run at application runtime!
 
   # ---------------------------------------------------------------- #
   # Alleviate the 'the big ball of mud'
@@ -49,27 +50,48 @@ module TestMe
   def before &block; end
   # ---------------------------------------------------------------- #
 
+  # ---------------------------------------------------------------- #
+  # Config Module
+  # ---------------------------------------------------------------- #
+  require "configatron"
+  @config = Configatron::Store.new
+
+  # Defaults
+  @config.dir = '/test/'
+  @config.suffix = '.test.rb'
+  @config.format = :console
+  @config.colors = :default
+
+  def self.config; @config; end
 end
 
 # ---------------------------------------------------------------- #
-# Inline Testing
+# Test Runner : Inline Testing
 # ---------------------------------------------------------------- #
-def testme &block;end
+def testme &block
+  if block && defined? TESTME_RUNNING && block
+    extend TestMe
+    block.call
+  end
+
+  return TestMe::config
+end
 
 # ---------------------------------------------------------------- #
 # Optional configuration
 # ---------------------------------------------------------------- #
-#TESTME_DIR
+#testme.dir
   # default: '/test/'
 
-#TESTME_SUFFIX
+#testme.suffix
+  # default: '.test.rb'
 
-#TESTME_FORMAT
+#testme.format
   # choose how results are displayed
   # options: :none, :text, :console
   # default: :console
 
-#TESTME_COLORS
+#testme.colors
   # color scheme for console output
   # options: :default
   # default: :default

@@ -6,7 +6,7 @@ def boot name, folder, &block
 end
 
 def testme_load filepath
-  if @file.include?(TestMe::TESTME_SUFFIX)
+  if @file.include?(TestMe::testme.suffix)
     testme do
       load filepath
     end
@@ -18,12 +18,13 @@ end
 def testme_setup
   puts 'Creating bootstrap "/.testme"'
   File.open("./.testme", "w") {|f| f.write(
-%q[TESTME_DIR = '/test/'
-TESTME_SUFFIX = '.test.rb'
-TESTME_FORMAT = :console
-TESTME_COLORS = :default
+%q[require "testme"
 
-require "testme"]
+testme.dir = '/test/'
+testme.suffix = '.test.rb'
+testme.format = :console
+testme.colors = :default
+]
 )} unless File.exists?("./.testme")
   puts 'Creating test folder "/test"'
   Dir::mkdir('./test/') unless File.directory?("./test/") || File.exists?("./test/")
@@ -49,13 +50,13 @@ TESTME_RUNNING = true
   
 if ARGV.empty?
   testme do
-    Dir["#{Dir.pwd}/#{TestMe::TESTME_DIR}/**/*#{TestMe::TESTME_SUFFIX}"].each{|f| load f } 
+    Dir["#{Dir.pwd}/#{testme.DIR}/**/*#{testme.suffix}"].each{|f| load f } 
   end
 elsif ARGV[0][0] == ':'
   o = @testme_boot[ARGV[0][1..-1].to_sym][1]
   o.call
 
-  Dir["#{o[0]}/**/*#{TestMe::TESTME_SUFFIX}"].each do |f| 
+  Dir["#{o[0]}/**/*#{testme.suffix}"].each do |f| 
     testme_load(f)
   end
 else
@@ -63,7 +64,7 @@ else
     @file = "#{Dir.pwd}/#{arg}"
 
     if File.directory?(@file)
-      Dir["#{@file}/**/*#{TestMe::TESTME_SUFFIX}"].each do |f| 
+      Dir["#{@file}/**/*#{testme.suffix}"].each do |f| 
         testme_load(@file)
       end
     elsif File.exists?(@file)

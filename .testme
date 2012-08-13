@@ -1,8 +1,8 @@
-boot :test, '/test' do
-  TESTME_DIR = '/test/'
-  TESTME_SUFFIX = '.test.rb'
-  TESTME_FORMAT = :console
-  TESTME_COLORS = :default
-end
-
 require "testme"
+
+boot :test, '/test' do
+  testme.dir = '/test/'
+  testme.suffix = '.test.rb'
+  testme.format = :console
+  testme.colors = :default
+end

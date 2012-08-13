@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency('rainbow', ['>= 1.1.3'])
   s.add_runtime_dependency('colorize', ['>= 0.5.8'])
+  s.add_runtime_dependency('configatron', ['>= 2.9.1'])
 end
