@@ -45,11 +45,13 @@
 
 `testme setup`
 
-***
+## Config
 
-    /.testme
-    /test/
-    /test/app.test.rb
+In your project root will be a `.testme` file, this is your bootstrap that runs before your tests
+
+The `/test/` folder will house all your test files, you can change this in your bootstrap
+
+## Bootstrap
 
 *Default .testme boiler plate on setup*
 *this might need to be reconfigured to cater to your project*
@@ -89,12 +91,6 @@
       testme.suffix = '.test.rb'
       testme.format = :none
     end
-
-## Config
-
-In your project root will be a `.testme` file, this is your bootstrap that runs before your tests
-
-The `/test/` folder will house all your test files, you can change this in your bootstrap
 
 ### Config options
 
