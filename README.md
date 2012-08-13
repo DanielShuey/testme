@@ -45,6 +45,8 @@
 
 `testme setup`
 
+***
+
     /.testme
     /test/
     /test/app.test.rb
