@@ -54,15 +54,15 @@ module TestMe
   # Config Module
   # ---------------------------------------------------------------- #
   require "configatron"
-  @config = Configatron::Store.new
+  @@config = Configatron::Store.new
 
   # Defaults
-  @config.dir = '/test/'
-  @config.suffix = '.test.rb'
-  @config.format = :console
-  @config.colors = :default
+  @@config.dir = '/test/'
+  @@config.suffix = '.test.rb'
+  @@config.format = :console
+  @@config.colors = :default
 
-  def self.config; @config; end
+  def self.config; @@config; end
 end
 
 # ---------------------------------------------------------------- #

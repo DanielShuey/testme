@@ -50,7 +50,7 @@ TESTME_RUNNING = true
   
 if ARGV.empty?
   testme do
-    Dir["#{Dir.pwd}/#{testme.DIR}/**/*#{testme.suffix}"].each{|f| load f } 
+    Dir["#{Dir.pwd}/#{testme.dir}/**/*#{testme.suffix}"].each{|f| load f } 
   end
 elsif ARGV[0][0] == ':'
   o = @testme_boot[ARGV[0][1..-1].to_sym][1]

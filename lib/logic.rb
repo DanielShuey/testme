@@ -69,13 +69,13 @@ module TestMe
       method = block
       result = block.call
     else
-      if args[0].class == Hash
+      if args[0].is_a? Hash
         method = args[0].first[0]
         expected = args[0].first[1]
         actual = topic.send(method)
       end
       
-      if args[0].class == Symbol
+      if args[0].is_a? Symbol
         params = args[0].args
         expected = args[1]
         actual = topic.send(args[0], *params)
