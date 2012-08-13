@@ -52,24 +52,41 @@
 *Default .testme boiler plate on setup*
 *this might need to be reconfigured to cater to your project*
 
-    TESTME_DIR = '/test/'
-    TESTME_SUFFIX = '.test.rb'
-    TESTME_FORMAT = :console
-    TESTME_COLORS = :default
-
     require "testme"
 
-#### Example config with bundler
+    testme.dir = '/test/'
+    testme.suffix = '.test.rb'
+    testme.format = :console
+    testme.colors = :default
 
-    TESTME_DIR = '/test/'
-    TESTME_SUFFIX = '.test.rb'
-    TESTME_FORMAT = :console
-    TESTME_COLORS = :default
+#### Example config with bundler
 
     require "rubygems"
     require "bundler"
     require "bundler/setup"
     Bundler.require :default, :test
+
+    testme.dir = '/test/'
+    testme.suffix = '.test.rb'
+    testme.format = :console
+    testme.colors = :default
+
+#### Named bootstraps are also possible
+
+    require "testme"
+
+    boot :test, '/test' do
+      testme.dir = '/test/'
+      testme.suffix = '.test.rb'
+      testme.format = :console
+      testme.colors = :default
+    end
+
+    boot :quiet, '/test' do
+      testme.dir = '/test/'
+      testme.suffix = '.test.rb'
+      testme.format = :none
+    end
 
 ## Config
 
@@ -79,15 +96,18 @@ The `/test/` folder will house all your test files, you can change this in your 
 
 ### Config options
 
-TESTME_DIR = '/test/'
+`testme.dir`
 * default: '/test/'
 
-TESTME_FORMAT = :console
+`testme.suffix`
+* default: '.test.rb'
+
+`testme.format`
 * choose how results are displayed
 * options: :none, :text, :console
 * default: :console
 
-TESTME_COLORS = :default
+`testme.colors`
 * color scheme for console output
 * options: :default
 * default: :default
@@ -100,6 +120,10 @@ TESTME_COLORS = :default
 default test folder: `/test/**/*`
 
     $ testme
+
+#### Test with named bootstrap
+    
+    $ testme :test
 
 #### Test all in directory
     
