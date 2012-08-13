@@ -43,33 +43,36 @@ module TestMe
   def is? *args, &block; end
   # ---------------------------------------------------------------- #
 
+  # Create a base context
+  # Re-runs every time 'given' is called
+  #    ` before do <block> end `
   def before &block; end
+  # ---------------------------------------------------------------- #
+
 end
 
 # ---------------------------------------------------------------- #
 # Inline Testing
 # ---------------------------------------------------------------- #
-def testme &block; end
+def testme &block;end
 
 # ---------------------------------------------------------------- #
 # Optional configuration
 # ---------------------------------------------------------------- #
-module TestMe
-  TESTME_DIR     = defined?(::TESTME_DIR)    ? ::TESTME_DIR : '/test/'
-    # default: '/test/'
+#TESTME_DIR
+  # default: '/test/'
 
-  TESTME_SUFFIX  = defined?(::TESTME_SUFFIX) ? ::TESTME_SUFFIX : '.test.rb'
+#TESTME_SUFFIX
 
-  TESTME_FORMAT  = defined?(::TESTME_FORMAT) ? ::TESTME_FORMAT : :console
-    # choose how results are displayed
-    # options: :none, :text, :console
-    # default: :console
+#TESTME_FORMAT
+  # choose how results are displayed
+  # options: :none, :text, :console
+  # default: :console
 
-  TESTME_COLORS  = defined?(::TESTME_COLORS) ? ::TESTME_COLORS : :default
-    # color scheme for console output
-    # options: :default
-    # default: :default
-end
+#TESTME_COLORS
+  # color scheme for console output
+  # options: :default
+  # default: :default
 
 # ---------------------------------------------------------------- #
 
