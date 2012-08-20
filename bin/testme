@@ -6,7 +6,7 @@ def boot name, folder, &block
 end
 
 def testme_load filepath
-  if @file.include?(TestMe::testme.suffix)
+  if filepath.include?(testme.suffix)
     testme do
       load filepath
     end
@@ -26,6 +26,7 @@ testme.format = :console
 testme.colors = :default
 ]
 )} unless File.exists?("./.testme")
+
   puts 'Creating test folder "/test"'
   Dir::mkdir('./test/') unless File.directory?("./test/") || File.exists?("./test/")
   puts 'Creating empty test file "/app.test.rb"'
@@ -55,8 +56,7 @@ if ARGV.empty?
 elsif ARGV[0][0] == ':'
   o = @testme_boot[ARGV[0][1..-1].to_sym][1]
   o.call
-
-  Dir["#{o[0]}/**/*#{testme.suffix}"].each do |f| 
+  Dir["#{Dir.pwd}/#{testme.dir}/**/*#{testme.suffix}"].each do |f| 
     testme_load(f)
   end
 else
@@ -65,7 +65,7 @@ else
 
     if File.directory?(@file)
       Dir["#{@file}/**/*#{testme.suffix}"].each do |f| 
-        testme_load(@file)
+        testme_load(f)
       end
     elsif File.exists?(@file)
       testme_load(@file)
