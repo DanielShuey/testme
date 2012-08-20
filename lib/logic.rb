@@ -8,7 +8,7 @@ module TestMe
     @before = nil
     @contexts = {}
   
-    @@formatter ||= Formatter::create(testme.format)
+    @@formatter = Formatter::create(testme.format)
     @@formatter.test topic
     
     @topic_class = topic
