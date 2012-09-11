@@ -321,6 +321,7 @@ When these features are completed
  - Test more complex method stubbing
  - Console color schemes
  - HTML reporting
+ - JSON/XML logging
 
 ## Design Decisions
 
