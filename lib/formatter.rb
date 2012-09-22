@@ -11,6 +11,10 @@ module TestMe
           return Formatter::Console.new
         when :html
           return Formatter::HTML.new
+        when :json
+          return false
+        when :xml
+          return false
       end
     end
  

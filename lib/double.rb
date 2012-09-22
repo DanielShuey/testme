@@ -19,5 +19,9 @@ module TestMe
       end
     end
 
+    def test *args, &block
+      method_missing :test, *args, &block
+    end
+
   end
 end
