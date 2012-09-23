@@ -3,27 +3,19 @@ module TestMe
     @topic
   end
 
-  def test topic
+  def test topic, *args
     @topic = nil
     @before = nil
     @contexts = {}
+    @args = args
   
     @@formatter = Formatter::create(testme.format)
-    @@formatter.test topic
     
     @topic_class = topic
+
+    @@formatter.test @topic_class.name
     
-    if topic.instance_of? Module
-      o = Object.new
-      o.extend topic
-      @topic = Double.new(o) 
-    end
-    
-    if topic.instance_of? Class
-      @topic = Double.new(topic.new)
-    end
-    
-    raise Exception, "Topic needs to be a Class or a Module" unless @topic
+    reset_topic
   end
  
   def given desc=nil, stubs=nil, &block
@@ -31,7 +23,7 @@ module TestMe
   
     @@formatter.given desc, stubs, &block
 
-    @topic = Double.new(@topic_class.new)
+    reset_topic
 
     if desc.class == String || desc.class == Symbol
       if stubs == nil and block == nil
@@ -80,7 +72,7 @@ module TestMe
         expected = args[1]
         actual = topic.send(args[0], *params)
       
-        method = args[0].to_s + (params ? '(' + params.join(',') + ')' : '')
+        method = args[0].to_s + ( params.size > 0 ? '(' + params.join(',') + ')' : '')
       end
       
       expected = true if expected.nil?
@@ -101,6 +93,18 @@ private
     attr_accessor :name, :block, :stubs
   end
   
+  def reset_topic
+   if @topic_class.instance_of? Module
+      o = Object.new
+      o.extend @topic_class
+      @topic = Double.new(o) 
+    end
+    
+    if @topic_class.instance_of? Class
+      @topic = Double.new(@topic_class.new(*@args))
+    end
+  end
+
   def class_from_string(str)
     str.split('::').inject(Object) do |mod, class_name|
       mod.const_get(class_name)

@@ -23,5 +23,12 @@ module TestMe
       method_missing :test, *args, &block
     end
 
+    def class
+      return @subject.class
+    end
+
+    def to_str
+      return @subject.to_s
+    end
   end
 end

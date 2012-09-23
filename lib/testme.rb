@@ -19,7 +19,7 @@ module TestMe
 
   # Set the topic of the test
   #   ` test Player `
-  def test topic; end
+  def test topic, *args; end
   # ---------------------------------------------------------------- #
 
   # Provide a context
