@@ -9,7 +9,7 @@ describe 'TestMe' do
   end
 
   describe '#topic' do
-    specify('is created') {topic.class.name.should == 'TestMe::Double'}
+    specify('is created') {topic.class.name.should == 'Mock'}
   end
 
   describe '#given' do
