@@ -11,9 +11,14 @@ module TestMe
   
     @@formatter = Formatter::create(testme.format)
     
-    @topic_class = topic
-
-    @@formatter.test @topic_class.name
+    case topic.class
+      when String || Symbol
+        @topic_class = Object
+        @@formatter.test topic
+      else
+        @topic_class = topic
+        @@formatter.test @topic_class
+    end
     
     reset_topic
   end
