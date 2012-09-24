@@ -93,6 +93,10 @@ module TestMe
     @before = block
   end
 
+  def self.formatter
+    return @@formatter
+  end
+
 private
   class Context
     attr_accessor :name, :block, :stubs
@@ -140,5 +144,11 @@ private
     if block
       block.call
     end
+  end
+end
+
+class String
+  def -@
+    TestMe::formatter.describe self
   end
 end

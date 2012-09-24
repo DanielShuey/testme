@@ -59,6 +59,10 @@ module TestMe
         #do nothing
       end
 
+      def describe msg
+        log '   -' + msg.bright.yellow
+      end
+
     private
       def block_to_string &block
         "(block)"
@@ -72,7 +76,7 @@ module TestMe
         str = ""
 
         if desc.class == String || desc.class == Symbol
-          str += ":#{desc}: ".blue
+          str += ":#{desc}: ".bright.cyan
         end
 
         if desc.class == Hash
@@ -113,6 +117,10 @@ module TestMe
 
       def compile
         #do nothing
+      end
+
+      def describe msg
+        log msg
       end
 
     private
