@@ -52,7 +52,11 @@ module TestMe
       def is? method, actual, expected
         success = actual == expected
 
-        log '      is '.bright + method.to_s + (method.class == Proc ? '' : ', ' + expected.to_s.yellow) + '? ' + (success ? 'YES'.bright.green : "NO, it was '#{actual}'".bright.red) + "\n\n"
+        if method.class == Proc
+          log '      is ' + block_to_string(&method) + '? ' + (success ? 'YES'.bright.green : "NO, it was '#{actual}'".bright.red) + "\n\n"
+        else
+          log '      is ' + method.to_s + ', ' + expected.to_s.yellow + '? ' + (success ? 'YES'.bright.green : "NO, it was '#{actual}'".bright.red) + "\n\n"
+        end
       end
 
       def compile
@@ -60,12 +64,13 @@ module TestMe
       end
 
       def describe msg
-        log '   -' + msg.bright.yellow
+        log '    ' + msg.bright.yellow
       end
 
     private
       def block_to_string &block
-        "(block)"
+        loc = block.source_location
+        `head -#{loc[1]} #{loc[0]} | tail -1 | grep -o {.*}`[2..-4]
       end
       
       def log msg
@@ -84,7 +89,7 @@ module TestMe
         end
 
         if stubs
-          str += stubs.map{|k,v| (k.to_s + ': ' + v.to_s).bright}.join(', ') + ' '
+          str += stubs.map{|k,v| (k.to_s + ': ' + v.to_s)}.join(', ') + ' '
         end
 
         if block
