@@ -8,6 +8,7 @@
 ## Cheatsheet
 - ` -'this is a test description'` - Describe the context (if necessary)
 - `test Player` - Defines the topic of the test
+- `test 'My Scenario'` - Non-unit test e.g scenario tests (all features still work)
 - `topic` - Retrieve the topic of the test
 - `given name: 'Flavie', class: 'Rogue'` - Provide a context
 - `given { topic.talk_to 'Deckard' }` - Create a context using a block
