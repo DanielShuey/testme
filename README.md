@@ -206,6 +206,10 @@ default test folder: `/test/**/*`
 
     test App::Account
 
+> For scenario testing, or testing a blank Object (all features will still work)
+
+    test 'An Idea'
+
 > This automatically creates an instance which you access with `topic`
 
     topic.name
