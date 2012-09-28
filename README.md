@@ -5,6 +5,22 @@
       given simple: true
         is? :simple  
 
+## Cheatsheet
+- ` -'this is a test description'` - Describe the context (if necessary)
+- `test Player` - Defines the topic of the test
+- `topic` - Retrieve the topic of the test
+- `given name: 'Flavie', class: 'Rogue'` - Provide a context
+- `given { topic.talk_to 'Deckard' }` - Create a context using a block
+- `given { topic.name = 'Flavie; topic.class = 'Rogue' }` - Code run inside a block will still automatically stub for you
+- `given :deckard_cains_name, name: Name.new(first: 'Deckard', last: 'Cain')` - Store a context
+- `given :deckard_cains_name` - Load a context
+- `given { topic.name.first = 'Deckard' }` - Create a stub chain
+- `also class: 'Rogue'` - Provide a context over the existing context
+- `is? :name, 'Flavie'` - Create an assertion
+- `is? :inventory[1], 'Arrows'` - Assertion with arguments
+- `is? { topic.inventory(1) == 'Arrows' }` - Assertion with block
+- `before do <block> end ` - Create a base context
+
 ## Detailed Example
 
     test Pizza
@@ -36,22 +52,6 @@
 >       given :hawaiian_style:
 >        also (block)
 >         is name, Santoni's Hawaiian Pizza? YES
-
-## Cheatsheet
-- ` -'this is a test description'` - Describe the context (if necessary)
-- `test Player` - Defines the topic of the test
-- `topic` - Retrieve the topic of the test
-- `given name: 'Flavie', class: 'Rogue'` - Provide a context
-- `given { topic.talk_to 'Deckard' }` - Create a context using a block
-- `given { topic.name = 'Flavie; topic.class = 'Rogue' }` - Code run inside a block will still automatically stub for you
-- `given :deckard_cains_name, name: Name.new(first: 'Deckard', last: 'Cain')` - Store a context
-- `given :deckard_cains_name` - Load a context
-- `given { topic.name.first = 'Deckard' }` - Create a stub chain
-- `also class: 'Rogue'` - Provide a context over the existing context
-- `is? :name, 'Flavie'` - Create an assertion
-- `is? :inventory[1], 'Arrows'` - Assertion with arguments
-- `is? { topic.inventory(1) == 'Arrows' }` - Assertion with block
-- `before do <block> end ` - Create a base context
 
 ## Setup
 
