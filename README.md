@@ -308,6 +308,15 @@ default test folder: `/test/**/*`
 
     before { topic.do_some_factory_stuff }
 
+***
+
+#### Describing or Commenting
+Use `-` followed by a String
+
+    -'this is a test description'
+
+***
+
 ## "This is too easy! How can I make this more challenging?"
 
 There is something about you that troubles me. Your manner is strange for a lonely code warrior.
