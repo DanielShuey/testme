@@ -37,6 +37,19 @@
 >        also (block)
 >         is name, Santoni's Hawaiian Pizza? YES
 
+## Cheatsheet
+` -'this is a test description'` - Describe the context (if necessary)
+`topic` - Retrieve the topic of the test
+`test Player` - Set the topic of the test
+`given name: 'Flavie', class: 'Rogue'` - Provide a context
+`given { topic.name = 'Flavie; topic.class = 'Rogue' }` - Stubbing an attribute
+`given { topic.talk_to 'Deckard' }` - calling a method
+`also class: 'Rogue'` - Provide a context over the existing context
+`is? :name, 'Flavie'` - Create an assertion
+`is? :inventory[1], 'Arrows'` - Assertion with arguments
+`is? { topic.inventory(1) == 'Arrows' }` - Assertion with block
+`before do <block> end ` - Create a base context
+
 ## Setup
 
 `gem install testme`
