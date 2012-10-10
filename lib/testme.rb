@@ -91,7 +91,7 @@ end
 
 #testme.format
   # choose how results are displayed
-  # options: :none, :text, :console
+  # options: :none, :console
   # default: :console
 
 #testme.colors

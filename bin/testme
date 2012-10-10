@@ -72,3 +72,8 @@ else
     end
   end
 end
+
+if TestMe::failed?
+  abort("Test Failed")
+end
+

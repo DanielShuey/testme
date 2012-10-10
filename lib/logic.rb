@@ -1,4 +1,6 @@
 module TestMe
+  @@failed = false
+
   def topic
     @topic
   end
@@ -84,7 +86,9 @@ module TestMe
       result = actual == expected
     end
 
-    @@formatter.is? method, actual, expected
+    @@formatter.is? method, actual, expected, result
+    
+    @@failed = true if result == false
 
     result
   end
@@ -94,10 +98,15 @@ module TestMe
   end
 
   def self.formatter
-    return @@formatter
+    @@formatter
+  end
+  
+  def self.failed?
+    @@failed
   end
 
 private
+
   class Context
     attr_accessor :name, :block, :stubs
   end

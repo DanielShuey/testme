@@ -5,8 +5,6 @@ module TestMe
       case format
         when :none
           return Formatter::None.new
-        when :text
-          return Formatter::Text.new
         when :console
           return Formatter::Console.new
         when :html
@@ -49,11 +47,9 @@ module TestMe
         log "     also " + context_to_string(desc, stubs, &block)
       end
 
-      def is? method, actual, expected
-        success = actual == expected
-
+      def is? method, actual, expected, success
         if method.class == Proc
-          log '      is ' + block_to_string(&method) + '? ' + (success ? 'YES'.bright.green : "NO, it was '#{actual}'".bright.red) + "\n\n"
+          log '      is ' + block_to_string(&method) + '? ' + (success ? 'YES'.bright.green : "NO".bright.red) + "\n\n"
         else
           log '      is ' + method.to_s + ', ' + expected.to_s.yellow + '? ' + (success ? 'YES'.bright.green : "NO, it was '#{actual}'".bright.red) + "\n\n"
         end
@@ -66,7 +62,7 @@ module TestMe
       def describe msg
         log '    ' + msg.bright.yellow
       end
-
+ 
     private
       def block_to_string &block
         loc = block.source_location
@@ -100,61 +96,5 @@ module TestMe
       end
 
     end
-
-    class Text < Console
-      def test topic
-        log "test " + topic.to_s
-      end
-
-      def given desc=nil, stubs=nil, &block
-        log "given " + context_to_string(desc, stubs, &block)
-      end
-
-      def also desc=nil, stubs=nil, &block
-        log "also " + context_to_string(desc, stubs, &block)
-      end
-
-      def is? method, actual, expected
-        success = actual == expected
-
-        log 'is ' + method.to_s + ', ' + expected.to_s + '? ' + (success ? 'YES' : "NO, it was '#{actual}'")
-      end
-
-      def compile
-        #do nothing
-      end
-
-      def describe msg
-        log msg
-      end
-
-    private
-      def block_to_string &block
-        "(block)"
-      end
-
-      def context_to_string desc=nil, stubs=nil, &block
-        str = ""
-
-        if desc.class == String || desc.class == Symbol
-          str += ":#{desc}: "
-        end
-
-        if desc.class == Hash
-          stubs = desc
-        end
-
-        if stubs
-          str += stubs.map{|k,v| (k.to_s + ': ' + v.to_s)}.join(', ')
-        end
-
-        if block
-          str += block_to_string(&block)
-        end
-
-        return str
-      end
-    end
-
   end
 end
