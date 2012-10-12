@@ -119,7 +119,7 @@ The `/test/` folder will house all your test files, you can change this in your 
 
 `testme.format`
 * choose how results are displayed
-* options: :none, :text, :console
+* options: :none, :console
 * default: :console
 
 `testme.colors`
