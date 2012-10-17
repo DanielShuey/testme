@@ -66,7 +66,21 @@ module TestMe
     private
       def block_to_string &block
         loc = block.source_location
-        `head -#{loc[1]} #{loc[0]} | tail -1 | grep -o {.*}`[2..-4]
+        read_line_number(loc[0], loc[1]).scan(/{.*}/)[0][2..-2]
+      end
+      
+      def read_line_number(filename, number)
+        counter = 0
+        line = nil
+        File.foreach(filename) do |line|
+          counter += 1
+          if counter == number
+            line.chomp!
+            return line
+          end
+        end
+        line = nil if counter != number
+        line
       end
       
       def log msg
