@@ -1,11 +1,32 @@
 # Test Me
+
 *A minimalistic testing framework*
 
     test Me
       given simple: true
         is? :simple
-        
-####For Ruby 1.9
+
+***
+
+####Available for Ruby 1.9 and above only
+
+***
+
+####Simple setup
+
+`gem install testme`
+
+*Then in your project root directory*
+
+`testme setup`
+
+***
+
+Cool stats (the more times people download it, the more support this will get!)
+
+[`https://rubygems.org/gems/testme`](https://rubygems.org/gems/testme)
+
+***
 
 ## Cheatsheet
 - ` -'this is a test description'` - Describe the context (if necessary)
