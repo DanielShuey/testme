@@ -1,3 +1,5 @@
+#### This is a proof of concept and should not be used for production
+
 # Test Me
 
 *A minimalistic testing framework*
